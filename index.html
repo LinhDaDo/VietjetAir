@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VietJet Air - Robot Hỗ Trợ Sân Bay</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+    <!-- Header Section -->
+    <header class="header">
+        <div class="header-content">
+            <div class="logo-section">
+                <div class="vietjet-logo">
+                    <div class="logo-star">
+                        <div class="star-part star-red"></div>
+                        <div class="star-part star-orange"></div>
+                    </div>
+                    <span class="logo-text">VietJet</span>
+                </div>
+                <h1>Sân Bay Tân Sơn Nhất - Hỗ Trợ Check-in</h1>
+            </div>
+            <div class="airport-info">
+                <div class="time-display" id="currentTime"></div>
+                <div class="weather-info">
+                    <i class="fas fa-sun"></i>
+                    <span>28°C Nắng đẹp</span>
+                </div>
+                <div class="language-switch">
+                    <button class="lang-btn active" data-lang="vi">VI</button>
+                    <button class="lang-btn" data-lang="en">EN</button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Welcome Section -->
+        <section class="welcome-section">
+            <div class="welcome-message">
+                <h2>Chào mừng bạn đến với VietJet Air!</h2>
+                <p>Chúng tôi sẽ hỗ trợ bạn thực hiện check-in và các dịch vụ sân bay</p>
+            </div>
+
+        </section>
+
+        <!-- Service Menu Grid -->
+        <section class="service-grid">
+            <div class="service-card" data-service="map">
+                <div class="service-icon">
+                    <i class="fas fa-map-marked-alt"></i>
+                </div>
+                <h3>Bản đồ hướng dẫn</h3>
+                <p>Chỉ đường trong sân bay</p>
+            </div>
+
+            <div class="service-card" data-service="checkin-guide">
+                <div class="service-icon">
+                    <i class="fas fa-clipboard-check"></i>
+                </div>
+                <h3>Hướng dẫn check-in</h3>
+                <p>Quy trình làm thủ tục</p>
+            </div>
+
+            <div class="service-card" data-service="online-checkin">
+                <div class="service-icon">
+                    <i class="fas fa-mobile-alt"></i>
+                </div>
+                <h3>Check-in trực tuyến</h3>
+                <p>Làm thủ tục online</p>
+            </div>
+
+            <div class="service-card" data-service="flight-info">
+                <div class="service-icon">
+                    <i class="fas fa-plane-departure"></i>
+                </div>
+                <h3>Tra cứu chuyến bay</h3>
+                <p>Thông tin và trạng thái</p>
+            </div>
+
+            <div class="service-card" data-service="faq">
+                <div class="service-icon">
+                    <i class="fas fa-question-circle"></i>
+                </div>
+                <h3>Câu hỏi thường gặp</h3>
+                <p>FAQ và hỗ trợ</p>
+            </div>
+
+            <div class="service-card" data-service="offers">
+                <div class="service-icon">
+                    <i class="fas fa-gift"></i>
+                </div>
+                <h3>Ưu đãi & Thành viên</h3>
+                <p>Khuyến mãi đặc biệt</p>
+            </div>
+        </section>
+
+        <!-- Service Content Panels -->
+        <section class="service-content" id="serviceContent">
+            <!-- Map Service -->
+            <div class="content-panel" id="map-panel">
+                <h3><i class="fas fa-map-marked-alt"></i> Bản đồ sân bay Tân Sơn Nhất</h3>
+                <div class="map-container">
+                    <div class="map-legend">
+                        <div class="legend-item">
+                            <div class="legend-color checkin"></div>
+                            <span>Quầy check-in VietJet</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-color security"></div>
+                            <span>Kiểm tra an ninh</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-color gate"></div>
+                            <span>Cổng lên máy bay</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-color facilities"></div>
+                            <span>Tiện ích</span>
+                        </div>
+                    </div>
+                    <div class="airport-map">
+                        <p>🗺️ Bản đồ Sân bay Quốc tế Tân Sơn Nhất</p>
+                        <div class="map-areas">
+                            <div class="area checkin-area">Check-in A-F<br>VietJet Air</div>
+                            <div class="area checkin-area">Check-in G-L<br>Hãng khác</div>
+                            <div class="area security-area">Kiểm tra<br>An ninh</div>
+                            <div class="area gate-area">Cổng đối<br>Nội địa</div>
+                            <div class="area gate-area">Cổng đối<br>Quốc tế</div>
+                            <div class="area facilities-area">Nhà hàng<br>Cửa hàng</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Check-in Guide -->
+            <div class="content-panel" id="checkin-guide-panel">
+                <h3><i class="fas fa-clipboard-check"></i> Hướng dẫn check-in VietJet Air</h3>
+                <div class="checkin-steps">
+                    <div class="step">
+                        <div class="step-number">1</div>
+                        <div class="step-content">
+                            <h4>Chuẩn bị giấy tờ</h4>
+                            <p>Mã đặt chỗ (PNR), CCCD/Hộ chiếu hoặc email xác nhận đặt vé</p>
+                        </div>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">2</div>
+                        <div class="step-content">
+                            <h4>Đến quầy check-in</h4>
+                            <p>Tìm quầy VietJet Air (A-F) hoặc sử dụng ki-ốt tự động</p>
+                        </div>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">3</div>
+                        <div class="step-content">
+                            <h4>Làm thủ tục</h4>
+                            <p>Xuất trình giấy tờ, chọn chỗ ngồi, gửi hành lý ký gửi (nếu có)</p>
+                        </div>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">4</div>
+                        <div class="step-content">
+                            <h4>Nhận thẻ lên máy bay</h4>
+                            <p>Kiểm tra thông tin trên thẻ và thẻ hành lý (nếu có)</p>
+                        </div>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">5</div>
+                        <div class="step-content">
+                            <h4>Đi kiểm tra an ninh</h4>
+                            <p>Mang theo thẻ lên máy bay và giấy tờ để kiểm tra</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="important-notes">
+                    <h4><i class="fas fa-exclamation-triangle"></i> Lưu ý quan trọng</h4>
+                    <ul>
+                        <li>Check-in sớm nhất: 3 tiếng trước giờ bay</li>
+                        <li>Check-in muộn nhất: 45 phút trước giờ bay (nội địa), 60 phút (quốc tế)</li>
+                        <li>Mang theo giấy tờ gốc, bản sao không hợp lệ</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Online Check-in -->
+            <div class="content-panel" id="online-checkin-panel">
+                <h3><i class="fas fa-mobile-alt"></i> Check-in trực tuyến</h3>
+                <div class="online-checkin-form">
+                    <div class="form-group">
+                        <label>Mã đặt chỗ (PNR)</label>
+                        <input type="text" placeholder="Nhập mã 6 ký tự (VD: ABC123)" id="bookingNumber">
+                    </div>
+                    <div class="form-group">
+                        <label>Họ và tên</label>
+                        <input type="text" placeholder="Nhập họ tên như trên vé" id="passengerName">
+                    </div>
+                    <button class="checkin-btn" onclick="performOnlineCheckin()">
+                        <i class="fas fa-check"></i> Bắt đầu check-in
+                    </button>
+                </div>
+                <div class="qr-section">
+                    <h4>Check-in nhanh bằng QR Code</h4>
+                    <div class="qr-placeholder">
+                        <i class="fas fa-qrcode"></i>
+                        <p>Mở app VietJet Air và quét mã QR trên vé điện tử</p>
+                        <button class="qr-btn">Hướng dẫn tải app</button>
+                    </div>
+                </div>
+                <div class="checkin-benefits">
+                    <h4>Ưu điểm check-in trực tuyến:</h4>
+                    <ul>
+                        <li>✅ Tiết kiệm thời gian tại sân bay</li>
+                        <li>✅ Chọn chỗ ngồi yêu thích</li>
+                        <li>✅ Cập nhật thông tin chuyến bay</li>
+                        <li>✅ Thẻ lên máy bay điện tử</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Flight Information -->
+            <div class="content-panel" id="flight-info-panel">
+                <h3><i class="fas fa-plane-departure"></i> 항공편 정보</h3>
+                <div class="flight-search">
+                    <input type="text" placeholder="항공편 번호 또는 목적지 검색" id="flightSearch">
+                    <button onclick="searchFlight()"><i class="fas fa-search"></i></button>
+                </div>
+                <div class="flight-board">
+                    <div class="flight-row header">
+                        <span>항공편</span>
+                        <span>목적지</span>
+                        <span>출발시간</span>
+                        <span>상태</span>
+                        <span>게이트</span>
+                    </div>
+                    <div class="flight-row">
+                        <span>VJ123</span>
+                        <span>하노이</span>
+                        <span>08:30</span>
+                        <span class="status on-time">정시</span>
+                        <span>A3</span>
+                    </div>
+                    <div class="flight-row">
+                        <span>VJ456</span>
+                        <span>다낭</span>
+                        <span>10:15</span>
+                        <span class="status delayed">지연</span>
+                        <span>B7</span>
+                    </div>
+                    <div class="flight-row">
+                        <span>VJ789</span>
+                        <span>푸꾸옥</span>
+                        <span>12:00</span>
+                        <span class="status boarding">탑승</span>
+                        <span>C2</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- FAQ -->
+            <div class="content-panel" id="faq-panel">
+                <h3><i class="fas fa-question-circle"></i> Câu hỏi thường gặp</h3>
+                <div class="faq-list">
+                    <div class="faq-item">
+                        <div class="faq-question" onclick="toggleFAQ(this)">
+                            <span>Check-in có thể làm đến khi nào?</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Nội địa: 45 phút trước giờ bay<br>Quốc tế: 60 phút trước giờ bay</p>
+                        </div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question" onclick="toggleFAQ(this)">
+                            <span>Quy định hành lý như thế nào?</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Hành lý xách tay: 7kg<br>Hành lý ký gửi: 20kg (có thể mua thêm)</p>
+                        </div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question" onclick="toggleFAQ(this)">
+                            <span>Làm sao để đổi chỗ ngồi?</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Có thể đổi trên app di động, website hoặc tại quầy sân bay</p>
+                        </div>
+                    </div>
+                    <div class="faq-item">
+                        <div class="faq-question" onclick="toggleFAQ(this)">
+                            <span>Có thể mang thức ăn lên máy bay không?</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="faq-answer">
+                            <p>Có thể mang thức ăn khô, trái cây. Không mang chất lỏng quá 100ml</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Offers and Membership -->
+            <div class="content-panel" id="offers-panel">
+                <h3><i class="fas fa-gift"></i> Ưu đãi và Thành viên</h3>
+                <div class="offers-grid">
+                    <div class="offer-card">
+                        <div class="offer-icon">
+                            <i class="fas fa-star"></i>
+                        </div>
+                        <h4>SkyJoy Club</h4>
+                        <p>Tích điểm và nhận ưu đãi đặc biệt</p>
+                        <button class="offer-btn">Đăng ký ngay</button>
+                    </div>
+                    <div class="offer-card">
+                        <div class="offer-icon">
+                            <i class="fas fa-percentage"></i>
+                        </div>
+                        <h4>Vé giá rẻ</h4>
+                        <p>Giảm đến 50% cho các tuyến bay nội địa</p>
+                        <button class="offer-btn">Xem ngay</button>
+                    </div>
+                    <div class="offer-card">
+                        <div class="offer-icon">
+                            <i class="fas fa-suitcase"></i>
+                        </div>
+                        <h4>Tour trọn gói</h4>
+                        <p>Vé máy bay + Khách sạn giá ưu đãi</p>
+                        <button class="offer-btn">Khám phá</button>
+                    </div>
+                    <div class="offer-card">
+                        <div class="offer-icon">
+                            <i class="fas fa-credit-card"></i>
+                        </div>
+                        <h4>Thẻ tín dụng VietJet</h4>
+                        <p>Hoàn tiền và ưu đãi đặc biệt</p>
+                        <button class="offer-btn">Tìm hiểu</button>
+                    </div>
+                </div>
+                <div class="membership-benefits">
+                    <h4>Quyền lợi thành viên SkyJoy:</h4>
+                    <div class="benefits-list">
+                        <div class="benefit-item">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Tích điểm cho mỗi chuyến bay</span>
+                        </div>
+                        <div class="benefit-item">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Giảm giá đặc biệt</span>
+                        </div>
+                        <div class="benefit-item">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Ưu tiên check-in và chọn chỗ</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- VietJet Floating Icon -->
+    <div class="vietjet-float-icon" id="vietjetFloatIcon">
+        <img src="https://cdn-media.vinbase.ai/chat-widget/vietjet-external/assets/images/logo-vj.png" alt="VietJet Air"
+            class="vj-logo-icon"
+            onerror="this.src='https://upload.wikimedia.org/wikipedia/commons/thumb/4/47/VietJet_Air_logo.svg/200px-VietJet_Air_logo.svg.png'">
+        <div class="pulse-ring"></div>
+    </div>
+
+    <!-- Chatbot Panel (Hidden by default) -->
+    <div class="chatbot-container" id="chatbotContainer" style="display: none;">
+        <div class="chatbot-header">
+            <div class="chatbot-avatar">
+                <img src="https://cdn-media.vinbase.ai/chat-widget/vietjet-external/assets/images/logo-vj.png"
+                    alt="VietJet Air" class="vj-logo-small">
+            </div>
+            <div class="chatbot-info">
+                <h4>Trợ lý ảo Amy</h4>
+                <div style="display: flex; justify-content: flex-start; align-items: center;">
+                    <img style="margin-right: 5px;" src="https://img.icons8.com/?size=100&id=FkQHNSmqWQWH&format=png&color=000000" width="10px" height="10px" object-fit="cover"
+                        alt="Status Icon">
+                    <p class="status-text"> Sẵn sàng hỗ trợ</p>
+                </div>
+            </div>
+            <div class="chatbot-controls">
+                <button class="voice-btn" id="voiceBtn" onclick="toggleVoice(event)">
+                    <i class="fas fa-microphone"></i>
+                </button>
+                <i class="fas fa-times close-btn" onclick="closeChatbot()"></i>
+            </div>
+        </div>
+
+        <div class="chatbot-body" id="chatbotBody">
+            <div class="chat-messages" id="chatMessages">
+                <div class="message bot-message">
+                    <div class="message-avatar">
+                        <img src="https://cdn-media.vinbase.ai/chat-widget/vietjet-external/assets/images/logo-vj.png"
+                            alt="VietJet" class="vj-logo-mini">
+                    </div>
+                    <div class="message-content">
+                        <p>Xin chào! Tôi là Amy, trợ lý ảo của VietJet Air. Tôi có thể giúp gì cho bạn?</p>
+                        <div class="message-timestamp" id="initialTimestamp"></div>
+                        <div class="quick-replies">
+                            <button onclick="sendQuickReply('Hướng dẫn check-in')">Hướng dẫn check-in</button>
+                            <button onclick="sendQuickReply('Thông tin chuyến bay')">Tra cứu chuyến bay</button>
+                            <button onclick="sendQuickReply('Bản đồ sân bay')">Đường đi sân bay</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="chat-input-area">
+                <div class="voice-indicator" id="voiceIndicator">
+                    <div class="voice-animation">
+                        <div class="voice-bar"></div>
+                        <div class="voice-bar"></div>
+                        <div class="voice-bar"></div>
+                    </div>
+                    <span>Đang nghe bạn nói...</span>
+                </div>
+                <div class="chat-input">
+                    <div class="input-wrapper">
+                        <input type="text" id="chatInput" placeholder="Nhập tin nhắn hoặc nhấn micro để nói...">
+                        <i class="fas fa-microphone input-mic-icon" onclick="toggleVoice(event)"></i>
+                    </div>
+                    <button onclick="sendMessage()" id="sendBtn">
+                        <i class="fas fa-paper-plane"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Back Button -->
+    <button class="back-btn" id="backBtn" onclick="goBack()">
+        <i class="fas fa-arrow-left"></i>
+        Quay lại
+    </button>
+
+    <!-- Scripts -->
+    <script src="script.js"></script>
+</body>
+
+</html>
