@@ -16,24 +16,32 @@
         <div class="header-content">
             <div class="logo-section">
                 <div class="vietjet-logo">
-                    <!-- <div class="logo-star">
-                        <div class="star-part star-red"></div>
-                        <div class="star-part star-orange"></div>
-                    </div> -->
-                    <!-- //logo day ne ku -->
-                    <span class="logo-text">VietJet</span>
+                    <img src="https://www.vietjetair.com/static/media/vj-logo.0f71c68b.svg" alt="VietJet Air" class="vietjet-logo-img">
                 </div>
-                <h1>Sân Bay Tân Sơn Nhất - Hỗ Trợ Check-in</h1>
             </div>
+            <h1 class="header-title">Trang chủ<br><span style="font-size: 16px; font-weight: 400; opacity: 0.8;">Homepage</span></h1>
             <div class="airport-info">
                 <div class="time-display" id="currentTime"></div>
                 <div class="weather-info">
                     <i class="fas fa-sun"></i>
                     <span>28°C Nắng đẹp</span>
                 </div>
-                <div class="language-switch">
-                    <button class="lang-btn active" data-lang="vi">VI</button>
-                    <button class="lang-btn" data-lang="en">EN</button>
+                <div class="language-dropdown">
+                    <div class="selected-language" id="selectedLanguage">
+                        <img src="https://flagcdn.com/w20/vn.png" alt="Vietnam" class="flag-icon">
+                        <span>VI</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="language-options" id="languageOptions">
+                        <div class="language-option" data-lang="vi">
+                            <img src="https://flagcdn.com/w20/vn.png" alt="Vietnam" class="flag-icon">
+                            <span>VI</span>
+                        </div>
+                        <div class="language-option" data-lang="en">
+                            <img src="https://flagcdn.com/w20/gb.png" alt="United Kingdom" class="flag-icon">
+                            <span>EN</span>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -57,7 +65,7 @@
                     <i class="fas fa-map-marked-alt"></i>
                 </div>
                 <h3>Bản đồ hướng dẫn</h3>
-                <p>Chỉ đường trong sân bay</p>
+                <p>Guilding map</p>
             </div>
 
             <div class="service-card" data-service="checkin-guide">
@@ -73,7 +81,7 @@
                     <i class="fas fa-mobile-alt"></i>
                 </div>
                 <h3>Check-in trực tuyến</h3>
-                <p>Làm thủ tục online</p>
+                <p>Online check-in</p>
             </div>
 
             <div class="service-card" data-service="flight-info">
@@ -89,7 +97,7 @@
                     <i class="fas fa-question-circle"></i>
                 </div>
                 <h3>Câu hỏi thường gặp</h3>
-                <p>FAQ và hỗ trợ</p>
+                <p>FAQs</p>
             </div>
 
             <div class="service-card" data-service="offers">
@@ -226,38 +234,38 @@
 
             <!-- Flight Information -->
             <div class="content-panel" id="flight-info-panel">
-                <h3><i class="fas fa-plane-departure"></i> 항공편 정보</h3>
+                <h3><i class="fas fa-plane-departure"></i> 항공편 thông tin</h3>
                 <div class="flight-search">
-                    <input type="text" placeholder="항공편 번호 또는 목적지 검색" id="flightSearch">
+                    <input type="text" placeholder="Hàng không hoặc đích đến tìm kiếm" id="flightSearch">
                     <button onclick="searchFlight()"><i class="fas fa-search"></i></button>
                 </div>
                 <div class="flight-board">
                     <div class="flight-row header">
-                        <span>항공편</span>
-                        <span>목적지</span>
-                        <span>출발시간</span>
-                        <span>상태</span>
-                        <span>게이트</span>
+                        <span>Hàng không</span>
+                        <span>Đích đến</span>
+                        <span>Giờ khởi hành</span>
+                        <span>Trạng thái</span>
+                        <span>Cổng</span>
                     </div>
                     <div class="flight-row">
                         <span>VJ123</span>
-                        <span>하노이</span>
+                        <span>Hà Nội</span>
                         <span>08:30</span>
-                        <span class="status on-time">정시</span>
+                        <span class="status on-time">Đúng giờ</span>
                         <span>A3</span>
                     </div>
                     <div class="flight-row">
                         <span>VJ456</span>
-                        <span>다낭</span>
+                        <span>Đà Nẵng</span>
                         <span>10:15</span>
-                        <span class="status delayed">지연</span>
+                        <span class="status delayed">Trễ</span>
                         <span>B7</span>
                     </div>
                     <div class="flight-row">
                         <span>VJ789</span>
-                        <span>푸꾸옥</span>
+                        <span>Phú Quốc</span>
                         <span>12:00</span>
-                        <span class="status boarding">탑승</span>
+                        <span class="status boarding">Đang lên máy bay</span>
                         <span>C2</span>
                     </div>
                 </div>
@@ -369,7 +377,7 @@
         <img src="https://cdn-media.vinbase.ai/chat-widget/vietjet-external/assets/images/logo-vj.png" alt="VietJet Air"
             class="vj-logo-icon"
             onerror="this.src='https://upload.wikimedia.org/wikipedia/commons/thumb/4/47/VietJet_Air_logo.svg/200px-VietJet_Air_logo.svg.png'">
-        <div class="pulse-ring"></div>
+        <div class="pulse-rng"></diiv>
     </div>
 
     <!-- Chatbot Panel (Hidden by default) -->
@@ -425,7 +433,7 @@
                 </div>
                 <div class="chat-input">
                     <div class="input-wrapper">
-                        <input type="text" id="chatInput" placeholder="Nhập tin nhắn hoặc nhấn micro để nói...">
+                        <input type="text" id="chatInput" placeholder="Nhập tin nhắn của bạn...">
                         <i class="fas fa-microphone input-mic-icon" onclick="toggleVoice(event)"></i>
                     </div>
                     <button onclick="sendMessage()" id="sendBtn">

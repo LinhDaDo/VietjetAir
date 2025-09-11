@@ -640,3 +640,62 @@ function initializeDragFunctionality() {
         el.style.transform = `translate(${xPos}px, ${yPos}px)`;
     }
 }
+
+// Language Dropdown Functions
+function initializeLanguageDropdown() {
+    const selectedLanguage = document.getElementById('selectedLanguage');
+    const languageOptions = document.getElementById('languageOptions');
+    const languageDropdown = selectedLanguage.closest('.language-dropdown');
+    const languageOptionItems = document.querySelectorAll('.language-option');
+    
+    // Toggle dropdown
+    selectedLanguage.addEventListener('click', function(e) {
+        e.stopPropagation();
+        languageDropdown.classList.toggle('open');
+    });
+    
+    // Handle language selection
+    languageOptionItems.forEach(option => {
+        option.addEventListener('click', function(e) {
+            e.stopPropagation();
+            const selectedLang = this.getAttribute('data-lang');
+            const flagIcon = this.querySelector('.flag-icon').src;
+            const langText = this.querySelector('span').textContent;
+            
+            // Update selected language display
+            const selectedFlag = selectedLanguage.querySelector('.flag-icon');
+            const selectedText = selectedLanguage.querySelector('span');
+            selectedFlag.src = flagIcon;
+            selectedText.textContent = langText;
+            
+            // Update active state
+            languageOptionItems.forEach(opt => opt.classList.remove('active'));
+            this.classList.add('active');
+            
+            // Close dropdown
+            languageDropdown.classList.remove('open');
+            
+            // Switch language
+            switchLanguage(selectedLang);
+        });
+    });
+    
+    // Close dropdown when clicking outside
+    document.addEventListener('click', function(e) {
+        if (!languageDropdown.contains(e.target)) {
+            languageDropdown.classList.remove('open');
+        }
+    });
+    
+    // Set initial active state
+    const initialOption = document.querySelector('.language-option[data-lang="vi"]');
+    if (initialOption) {
+        initialOption.classList.add('active');
+    }
+}
+
+// Initialize language dropdown when page loads
+document.addEventListener('DOMContentLoaded', function() {
+    // ... existing initialization code ...
+    initializeLanguageDropdown();
+});

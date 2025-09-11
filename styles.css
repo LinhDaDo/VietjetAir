@@ -26,6 +26,7 @@ body {
     align-items: center;
     max-width: 1400px;
     margin: 0 auto;
+    position: relative;
 }
 
 .logo-section {
@@ -34,11 +35,28 @@ body {
     gap: 20px;
 }
 
+.header-title {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    color: #2c3e50;
+    font-size: 28px;
+    font-weight: 700;
+    margin: 0;
+}
+
 /* VietJet Logo Styles */
 .vietjet-logo {
     display: flex;
     align-items: center;
     gap: 10px;
+}
+
+.vietjet-logo-img {
+    height: 45px;
+    width: auto;
+    object-fit: contain;
 }
 
 .logo-star {
@@ -79,26 +97,90 @@ body {
     letter-spacing: 1px;
 }
 
-.language-switch {
+.language-dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.selected-language {
     display: flex;
-    background: rgba(255, 255, 255, 0.2);
-    border-radius: 20px;
-    overflow: hidden;
-}
-
-.lang-btn {
-    background: transparent;
-    border: none;
-    padding: 8px 16px;
-    color: #2c3e50;
-    font-weight: 500;
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-.lang-btn.active {
+    align-items: center;
+    gap: 8px;
     background: rgba(255, 255, 255, 0.9);
-    color: #E31E24;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 6px;
+    padding: 8px 12px;
+    cursor: pointer;
+    font-weight: 500;
+    color: #2c3e50;
+    transition: all 0.3s ease;
+    min-width: 80px;
+}
+
+.selected-language:hover {
+    background: rgba(255, 255, 255, 1);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.flag-icon {
+    width: 20px;
+    height: 15px;
+    object-fit: cover;
+    border-radius: 2px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+.selected-language i {
+    margin-left: auto;
+    font-size: 12px;
+    transition: transform 0.3s ease;
+}
+
+.language-dropdown.open .selected-language i {
+    transform: rotate(180deg);
+}
+
+.language-options {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: white;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    border-radius: 6px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    overflow: hidden;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: all 0.3s ease;
+    z-index: 1000;
+}
+
+.language-dropdown.open .language-options {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.language-option {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 12px;
+    cursor: pointer;
+    font-weight: 500;
+    color: #2c3e50;
+    transition: background-color 0.2s ease;
+}
+
+.language-option:hover {
+    background-color: #f8f9fa;
+}
+
+.language-option.active {
+    background-color: #E31E24;
+    color: white;
 }
 
 /* Amy Mascot Styles */
@@ -1205,7 +1287,7 @@ body {
 }
 
 .user-message .message-content {
-    background: linear-gradient(135deg, #FF6B35 0%, #E31E24 100%);
+    background: #E53935;
     color: white;
     padding: 15px;
     border-radius: 15px 15px 5px 15px;
@@ -1232,19 +1314,30 @@ body {
 /* Timestamp alignment for user messages (right side) */
 .user-message .message-timestamp {
     text-align: right;
+    color: #888888 !important;
+    background: rgba(255, 255, 255, 0.95) !important;
+    padding: 3px 8px !important;
+    border-radius: 8px !important;
+    font-weight: 500 !important;
+    display: inline-block !important;
+    margin-top: 8px;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2) !important;
+    border: 1px solid rgba(0, 0, 0, 0.1) !important;
+    font-size: 11px !important;
+    backdrop-filter: blur(2px) !important;
 }
 
 /* User avatar icon styling */
 .user-avatar-icon {
     width: 35px;
     height: 35px;
-    background: linear-gradient(135deg, #FF6B35 0%, #E31E24 100%);
+    background: #E53935;
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
     border: 2px solid white;
-    box-shadow: 0 2px 8px rgba(255, 107, 53, 0.3);
+    box-shadow: 0 2px 8px rgba(229, 57, 53, 0.3);
 }
 
 .user-avatar-icon i {
