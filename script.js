@@ -5,15 +5,64 @@ let isChatbotOpen = true;
 let recognition = null;
 let synthesis = window.speechSynthesis;
 let currentLanguage = 'vi'; // Default to Vietnamese
+let isAppLoaded = false;
 
 // Initialize the application
 document.addEventListener('DOMContentLoaded', function() {
+    showLoadingScreen();
+});
+
+// Show loading screen and simulate loading process
+function showLoadingScreen() {
+    const loadingScreen = document.getElementById('loadingScreen');
+    const mainApp = document.getElementById('mainApp');
+    
+    // Ensure loading screen is visible
+    loadingScreen.style.display = 'flex';
+    mainApp.style.display = 'none';
+    
+    // Auto transition after exactly 2 seconds
+    setTimeout(() => {
+        completeLoading();
+    }, 2000);
+}
+
+// Complete loading and show main application
+function completeLoading() {
+    const loadingScreen = document.getElementById('loadingScreen');
+    const mainApp = document.getElementById('mainApp');
+    
+    // Fade out loading screen
+    loadingScreen.classList.add('hidden');
+    
+    // Show main app after transition
+    setTimeout(() => {
+        loadingScreen.style.display = 'none';
+        mainApp.style.display = 'block';
+        
+        // Fade in main app
+        setTimeout(() => {
+            mainApp.classList.add('visible');
+            initializeMainApp();
+        }, 100);
+        
+    }, 800); // Wait for fade out transition
+}
+
+// Initialize main application after loading
+function initializeMainApp() {
+    if (isAppLoaded) return; // Prevent double initialization
+    
+    isAppLoaded = true;
     initializeApp();
     setupEventListeners();
     initializeSpeechRecognition();
     updateTime();
     setInterval(updateTime, 1000);
-});
+    initializeBatteryStatus();
+    updateBatteryStatus();
+    setInterval(updateBatteryStatus, 30000); // Update every 30 seconds
+}
 
 // Initialize the application
 function initializeApp() {
@@ -93,6 +142,88 @@ function updateTime() {
         hour12: false
     });
     timeDisplay.textContent = timeString;
+}
+
+// Initialize battery status
+function initializeBatteryStatus() {
+    // Check if Battery API is supported
+    if ('getBattery' in navigator) {
+        navigator.getBattery().then(function(battery) {
+            updateBatteryDisplay(battery.level, battery.charging);
+            
+            // Add event listeners for battery changes
+            battery.addEventListener('levelchange', function() {
+                updateBatteryDisplay(battery.level, battery.charging);
+            });
+            
+            battery.addEventListener('chargingchange', function() {
+                updateBatteryDisplay(battery.level, battery.charging);
+            });
+        });
+    } else {
+        // Fallback for browsers that don't support Battery API
+        simulateBatteryStatus();
+    }
+}
+
+// Update battery status (fallback simulation)
+function updateBatteryStatus() {
+    if (!('getBattery' in navigator)) {
+        simulateBatteryStatus();
+    }
+}
+
+// Simulate battery status for browsers without Battery API
+function simulateBatteryStatus() {
+    // Generate a random battery level between 15% and 100%
+    const batteryLevel = Math.random() * 0.85 + 0.15; // 15% to 100%
+    const isCharging = Math.random() > 0.7; // 30% chance of charging
+    
+    updateBatteryDisplay(batteryLevel, isCharging);
+}
+
+// Update battery display
+function updateBatteryDisplay(level, charging) {
+    const batteryIcon = document.getElementById('batteryIcon');
+    const batteryPercentage = document.getElementById('batteryPercentage');
+    const batteryInfo = document.getElementById('batteryInfo');
+    
+    if (!batteryIcon || !batteryPercentage || !batteryInfo) return;
+    
+    const percentage = Math.round(level * 100);
+    batteryPercentage.textContent = percentage + '%';
+    
+    // Remove all battery classes
+    batteryIcon.className = batteryIcon.className.replace(/fa-battery-[\w-]+/g, '');
+    batteryInfo.classList.remove('low-battery');
+    
+    // Determine battery icon based on level
+    let iconClass = '';
+    let iconColor = '';
+    
+    if (charging) {
+        iconClass = 'fas fa-charging-station';
+        iconColor = '#4CAF50'; // Green for charging
+    } else if (percentage <= 20) {
+        iconClass = 'fas fa-battery-empty';
+        iconColor = '#f44336'; // Red for low battery
+        batteryInfo.classList.add('low-battery'); // Add pulsing animation
+    } else if (percentage <= 40) {
+        iconClass = 'fas fa-battery-quarter';
+        iconColor = '#FF9800'; // Orange for medium-low
+    } else if (percentage <= 60) {
+        iconClass = 'fas fa-battery-half';
+        iconColor = '#FFC107'; // Yellow for medium
+    } else if (percentage <= 80) {
+        iconClass = 'fas fa-battery-three-quarters';
+        iconColor = '#8BC34A'; // Light green for good
+    } else {
+        iconClass = 'fas fa-battery-full';
+        iconColor = '#4CAF50'; // Green for full
+    }
+    
+    batteryIcon.className = iconClass;
+    batteryIcon.style.color = iconColor;
 }
 
 // Show specific service content

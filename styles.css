@@ -5,6 +5,110 @@
     box-sizing: border-box;
 }
 
+/* Loading Screen Styles */
+.loading-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #E31E24;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10000;
+    opacity: 1;
+    visibility: visible;
+    transition: opacity 0.8s ease, visibility 0.8s ease;
+}
+
+.loading-screen.hidden {
+    opacity: 0;
+    visibility: hidden;
+}
+
+.loading-content {
+    text-align: center;
+    color: white;
+}
+
+.loading-logo {
+    margin-bottom: 30px;
+}
+
+.loading-logo-img {
+    height: 80px;
+    width: auto;
+    filter: brightness(0) invert(1);
+    animation: float 2s ease-in-out infinite;
+}
+
+.loading-spinner {
+    margin: 20px 0;
+}
+
+.spinner-ring {
+    width: 40px;
+    height: 40px;
+    border: 3px solid rgba(255, 255, 255, 0.3);
+    border-top: 3px solid white;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin: 0 auto;
+}
+
+/* Loading Animations */
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0px);
+    }
+    50% {
+        transform: translateY(-8px);
+    }
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+/* Responsive Design for Loading Screen */
+@media (max-width: 768px) {
+    .loading-logo-img {
+        height: 60px;
+    }
+    
+    .spinner-ring {
+        width: 35px;
+        height: 35px;
+    }
+}
+
+@media (max-width: 480px) {
+    .loading-logo-img {
+        height: 50px;
+    }
+    
+    .spinner-ring {
+        width: 30px;
+        height: 30px;
+    }
+}
+
+/* Main App Container */
+.main-app {
+    opacity: 0;
+    transition: opacity 0.8s ease;
+}
+
+.main-app.visible {
+    opacity: 1;
+}
+
 body {
     font-family: 'Inter', sans-serif;
     background: url('assets/cloud.jpg') center/cover fixed;
@@ -339,11 +443,25 @@ body {
     gap: 8px;
     font-size: 18px;
     color: white;
+    font-weight: 500;
 }
 
 .battery-info i {
-    color: #4CAF50;
     font-size: 20px;
+    transition: color 0.3s ease;
+}
+
+.battery-info.low-battery {
+    animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.6;
+    }
 }
 
 /* Main Content */

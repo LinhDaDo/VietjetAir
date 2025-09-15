@@ -11,6 +11,20 @@
 </head>
 
 <body>
+    <!-- Loading Screen -->
+    <div class="loading-screen" id="loadingScreen">
+        <div class="loading-content">
+            <div class="loading-logo">
+                <img src="https://www.vietjetair.com/static/media/vj-logo.0f71c68b.svg" alt="VietJet Air" class="loading-logo-img">
+            </div>
+            <div class="loading-spinner">
+                <div class="spinner-ring"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Application Content -->
+    <div class="main-app" id="mainApp" style="display: none;">
     <!-- Realistic Cloud Background -->
     <div class="clouds"></div>
 
@@ -24,11 +38,6 @@
             </div>
             <h1 class="header-title">Trang chủ<br><span style="font-size: 16px; font-weight: 400; opacity: 0.8;">Homepage</span></h1>
             <div class="airport-info">
-                <div class="time-display" id="currentTime"></div>
-                <div class="weather-info">
-                    <i class="fas fa-sun"></i>
-                    <span>28°C</span>
-                </div>
                 <div class="language-dropdown">
                     <div class="selected-language" id="selectedLanguage">
                         <img src="https://flagcdn.com/w20/vn.png" alt="Vietnam" class="flag-icon">
@@ -45,6 +54,15 @@
                             <span>EN</span>
                         </div>
                     </div>
+                </div>
+                <div class="time-display" id="currentTime"></div>
+                <div class="weather-info">
+                    <i class="fas fa-sun"></i>
+                    <span>28°C</span>
+                </div>
+                <div class="battery-info" id="batteryInfo">
+                    <i class="fas fa-battery-three-quarters" id="batteryIcon"></i>
+                    <span id="batteryPercentage">85%</span>
                 </div>
             </div>
         </div>
@@ -455,6 +473,8 @@
 
     <!-- Scripts -->
     <script src="script.js"></script>
+    </div>
+    <!-- End Main App -->
 </body>
 
 </html>
