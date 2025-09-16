@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thông tin - VietJet Air</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+    <!-- Main Application Content -->
+    <div class="main-app info-page" style="display: block;">
+        <!-- Realistic Cloud Background -->
+        <div class="clouds"></div>
+
+        <!-- Header Section -->
+        <header class="header">
+            <div class="header-content">
+                <div class="logo-section">
+                    <div class="menu-icon" onclick="toggleDrawer()">
+                        <div class="menu-lines">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+                    </div>
+                    <div class="vietjet-logo">
+                        <img src="https://www.vietjetair.com/static/media/vj-logo.0f71c68b.svg" alt="VietJet Air" class="vietjet-logo-img">
+                    </div>
+                </div>
+                <h1 class="header-title">Thông tin<br><span style="font-size: 16px; font-weight: 400; opacity: 0.8;">Information</span></h1>
+                <div class="airport-info">
+                    <div class="language-dropdown">
+                        <div class="selected-language" id="selectedLanguage">
+                            <img src="https://flagcdn.com/w20/vn.png" alt="Vietnam" class="flag-icon">
+                            <span>VI</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="language-options" id="languageOptions">
+                            <div class="language-option" data-lang="vi">
+                                <img src="https://flagcdn.com/w20/vn.png" alt="Vietnam" class="flag-icon">
+                                <span>VI</span>
+                            </div>
+                            <div class="language-option" data-lang="en">
+                                <img src="https://flagcdn.com/w20/gb.png" alt="United Kingdom" class="flag-icon">
+                                <span>EN</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="time-display" id="currentTime"></div>
+                    <div class="weather-info">
+                        <i class="fas fa-sun"></i>
+                        <span>28°C</span>
+                    </div>
+                    <div class="battery-info" id="batteryInfo">
+                        <i class="fas fa-battery-three-quarters" id="batteryIcon"></i>
+                        <span id="batteryPercentage">85%</span>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Navigation Drawer -->
+        <div class="drawer-overlay" id="drawerOverlay" onclick="closeDrawer()"></div>
+        <div class="drawer" id="navigationDrawer">
+            <div class="drawer-header">
+                <div class="drawer-logo">
+                    <img src="https://www.vietjetair.com/static/media/vj-logo.0f71c68b.svg" alt="VietJet Air" class="drawer-logo-img">
+                </div>
+                <button class="drawer-close" onclick="closeDrawer()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="drawer-content">
+                <nav class="drawer-nav">
+                    <a href="index.html" class="nav-item">
+                        <i class="fas fa-home"></i>
+                        <span>Trang chủ</span>
+                    </a>
+                    <a href="settings.html" class="nav-item">
+                        <i class="fas fa-cog"></i>
+                        <span>Cài đặt</span>
+                    </a>
+                    <a href="info.html" class="nav-item active">
+                        <i class="fas fa-info-circle"></i>
+                        <span>Thông tin</span>
+                    </a>
+                    <a href="#" class="nav-item">
+                        <i class="fas fa-gamepad"></i>
+                        <span>Playground</span>
+                    </a>
+                    <div class="nav-divider"></div>
+                    <a href="#" class="nav-item">
+                        <i class="fas fa-headset"></i>
+                        <span>Hỗ trợ khách hàng</span>
+                    </a>
+                    <a href="#" class="nav-item">
+                        <i class="fas fa-phone"></i>
+                        <span>Thông tin liên hệ</span>
+                    </a>
+                </nav>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Info Content -->
+            <section class="info-page-content">
+                <div class="info-container">
+                    <!-- App Information Section -->
+                    <div class="info-section">
+                        <h4>Thông tin ứng dụng</h4>
+                        
+                        <div class="info-item">
+                            <div class="info-label">Tên ứng dụng</div>
+                            <div class="info-value">VietJet Robot App</div>
+                        </div>
+                        
+                        <div class="info-item">
+                            <div class="info-label">Nhà phát triển</div>
+                            <div class="info-value">VietJet Air</div>
+                        </div>
+                        
+                        <div class="info-item">
+                            <div class="info-label">Bản quyền</div>
+                            <div class="info-value">© 2024 VietJet Air</div>
+                        </div>
+                    </div>
+
+                    <!-- Version Information Section -->
+                    <div class="info-section">
+                        <h4>Thông tin phiên bản</h4>
+                        
+                        <div class="info-item">
+                            <div class="info-label">Phiên bản hiện tại</div>
+                            <div class="info-value">1.0.0</div>
+                        </div>
+                        
+                        <div class="info-item">
+                            <div class="info-label">Phiên bản mới nhất</div>
+                            <div class="info-value">1.0.0</div>
+                        </div>
+                    </div>
+
+                    <!-- Options Section -->
+                    <div class="info-section">
+                        <h4>Tùy chọn</h4>
+                        
+                        <div class="info-item clickable" onclick="checkForUpdates()">
+                            <div class="info-content">
+                                <div class="info-label">Kiểm tra phiên bản</div>
+                                <div class="info-description">Phiên bản hiện tại: 1.0.0</div>
+                            </div>
+                            <div class="info-arrow">
+                                <i class="fas fa-chevron-right"></i>
+                            </div>
+                        </div>
+                        
+                        <div class="info-item toggle-item">
+                            <div class="info-content">
+                                <div class="info-label">Tự động cập nhật</div>
+                                <div class="info-description">Tự động tải và cài đặt bản cập nhật</div>
+                            </div>
+                            <div class="toggle-switch">
+                                <input type="checkbox" id="autoUpdate" checked>
+                                <label for="autoUpdate" class="toggle-label"></label>
+                            </div>
+                        </div>
+                        
+                        <div class="info-item clickable" onclick="showUpdateOptions()">
+                            <div class="info-content">
+                                <div class="info-label">Cập nhật ngay</div>
+                                <div class="info-description">Kiểm tra và cài đặt bản cập nhật mới nhất</div>
+                            </div>
+                            <div class="info-arrow">
+                                <i class="fas fa-chevron-right"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- VietJet Floating Icon -->
+        <div class="vietjet-float-icon" id="vietjetFloatIcon">
+            <img src="https://cdn-media.vinbase.ai/chat-widget/vietjet-external/assets/images/logo-vj.png" alt="VietJet Air"
+                class="vj-logo-icon"
+                onerror="this.src='https://upload.wikimedia.org/wikipedia/commons/thumb/4/47/VietJet_Air_logo.svg/200px-VietJet_Air_logo.svg.png'">
+            <div class="pulse-rng"></div>
+        </div>
+
+        <!-- Chatbot Panel (Hidden by default) -->
+        <div class="chatbot-container" id="chatbotContainer" style="display: none;">
+            <div class="chatbot-header">
+                <div class="chatbot-avatar">
+                    <img src="https://cdn-media.vinbase.ai/chat-widget/vietjet-external/assets/images/logo-vj.png"
+                        alt="VietJet Air" class="vj-logo-small">
+                </div>
+                <div class="chatbot-info">
+                    <h4>Trợ lý ảo Amy</h4>
+                    <div style="display: flex; justify-content: flex-start; align-items: center;">
+                        <img style="margin-right: 5px;" src="https://img.icons8.com/?size=100&id=FkQHNSmqWQWH&format=png&color=000000" width="10px" height="10px" object-fit="cover"
+                            alt="Status Icon">
+                        <p class="status-text"> Sẵn sàng hỗ trợ</p>
+                    </div>
+                </div>
+                <div class="chatbot-controls">
+                    <button class="voice-btn" id="voiceBtn" onclick="toggleVoice(event)">
+                        <i class="fas fa-microphone"></i>
+                    </button>
+                    <i class="fas fa-times close-btn" onclick="closeChatbot()"></i>
+                </div>
+            </div>
+
+            <div class="chatbot-body" id="chatbotBody">
+                <div class="chat-messages" id="chatMessages">
+                    <div class="message bot-message">
+                        <div class="message-avatar">
+                            <img src="https://cdn-media.vinbase.ai/chat-widget/vietjet-external/assets/images/logo-vj.png"
+                                alt="VietJet" class="vj-logo-mini">
+                        </div>
+                        <div class="message-content">
+                            <p>Xin chào! Tôi là Amy, trợ lý ảo của VietJet Air. Tôi có thể giúp gì cho bạn?</p>
+                            <div class="message-timestamp" id="initialTimestamp"></div>
+                            <div class="quick-replies">
+                                <button onclick="sendQuickReply('Hướng dẫn check-in')">Hướng dẫn check-in</button>
+                                <button onclick="sendQuickReply('Thông tin chuyến bay')">Tra cứu chuyến bay</button>
+                                <button onclick="sendQuickReply('Bản đồ sân bay')">Đường đi sân bay</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="chat-input-area">
+                    <div class="voice-indicator" id="voiceIndicator">
+                        <div class="voice-animation">
+                            <div class="voice-bar"></div>
+                            <div class="voice-bar"></div>
+                            <div class="voice-bar"></div>
+                        </div>
+                        <span>Đang nghe bạn nói...</span>
+                    </div>
+                    <div class="chat-input">
+                        <div class="input-wrapper">
+                            <input type="text" id="chatInput" placeholder="Nhập tin nhắn của bạn...">
+                            <i class="fas fa-microphone input-mic-icon" onclick="toggleVoice(event)"></i>
+                        </div>
+                        <button onclick="sendMessage()" id="sendBtn">
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Scripts -->
+        <script src="script.js"></script>
+        <script src="info.js"></script>
+    </div>
+    <!-- End Main App -->
+</body>
+
+</html>

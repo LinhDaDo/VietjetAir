@@ -32,6 +32,13 @@
     <header class="header">
         <div class="header-content">
             <div class="logo-section">
+                <div class="menu-icon" onclick="toggleDrawer()">
+                    <div class="menu-lines">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
+                </div>
                 <div class="vietjet-logo">
                     <img src="https://www.vietjetair.com/static/media/vj-logo.0f71c68b.svg" alt="VietJet Air" class="vietjet-logo-img">
                 </div>
@@ -68,6 +75,48 @@
         </div>
     </header>
 
+    <!-- Navigation Drawer -->
+    <div class="drawer-overlay" id="drawerOverlay" onclick="closeDrawer()"></div>
+    <div class="drawer" id="navigationDrawer">
+        <div class="drawer-header">
+            <div class="drawer-logo">
+                <img src="https://www.vietjetair.com/static/media/vj-logo.0f71c68b.svg" alt="VietJet Air" class="drawer-logo-img">
+            </div>
+            <button class="drawer-close" onclick="closeDrawer()">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="drawer-content">
+            <nav class="drawer-nav">
+                <a href="index.html" class="nav-item active">
+                    <i class="fas fa-home"></i>
+                    <span>Trang chủ</span>
+                </a>
+                <a href="settings.html" class="nav-item">
+                    <i class="fas fa-cog"></i>
+                    <span>Cài đặt</span>
+                </a>
+                <a href="info.html" class="nav-item">
+                    <i class="fas fa-info-circle"></i>
+                    <span>Thông tin</span>
+                </a>
+                <a href="#" class="nav-item" onclick="selectService('playground')">
+                    <i class="fas fa-gamepad"></i>
+                    <span>Playground</span>
+                </a>
+                <div class="nav-divider"></div>
+                <a href="#" class="nav-item">
+                    <i class="fas fa-headset"></i>
+                    <span>Hỗ trợ khách hàng</span>
+                </a>
+                <a href="#" class="nav-item">
+                    <i class="fas fa-phone"></i>
+                    <span>Thông tin liên hệ</span>
+                </a>
+            </nav>
+        </div>
+    </div>
+
     <!-- Main Content -->
     <main class="main-content">
         <!-- Welcome Section -->
@@ -81,7 +130,7 @@
 
         <!-- Service Menu Grid -->
         <section class="service-grid">
-            <div class="service-card" data-service="map">
+            <div class="service-card" data-service="map" onclick="window.location.href='map.html'">
                 <div class="service-icon">
                     <i class="fas fa-map-marked-alt"></i>
                 </div>
@@ -132,42 +181,6 @@
 
         <!-- Service Content Panels -->
         <section class="service-content" id="serviceContent">
-            <!-- Map Service -->
-            <div class="content-panel" id="map-panel">
-                <h3><i class="fas fa-map-marked-alt"></i> Bản đồ sân bay Tân Sơn Nhất</h3>
-                <div class="map-container">
-                    <div class="map-legend">
-                        <div class="legend-item">
-                            <div class="legend-color checkin"></div>
-                            <span>Quầy check-in VietJet</span>
-                        </div>
-                        <div class="legend-item">
-                            <div class="legend-color security"></div>
-                            <span>Kiểm tra an ninh</span>
-                        </div>
-                        <div class="legend-item">
-                            <div class="legend-color gate"></div>
-                            <span>Cổng lên máy bay</span>
-                        </div>
-                        <div class="legend-item">
-                            <div class="legend-color facilities"></div>
-                            <span>Tiện ích</span>
-                        </div>
-                    </div>
-                    <div class="airport-map">
-                        <p>🗺️ Bản đồ Sân bay Quốc tế Tân Sơn Nhất</p>
-                        <div class="map-areas">
-                            <div class="area checkin-area">Check-in A-F<br>VietJet Air</div>
-                            <div class="area checkin-area">Check-in G-L<br>Hãng khác</div>
-                            <div class="area security-area">Kiểm tra<br>An ninh</div>
-                            <div class="area gate-area">Cổng đối<br>Nội địa</div>
-                            <div class="area gate-area">Cổng đối<br>Quốc tế</div>
-                            <div class="area facilities-area">Nhà hàng<br>Cửa hàng</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
             <!-- Check-in Guide -->
             <div class="content-panel" id="checkin-guide-panel">
                 <h3><i class="fas fa-clipboard-check"></i> Hướng dẫn check-in VietJet Air</h3>

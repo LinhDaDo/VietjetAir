@@ -830,3 +830,74 @@ document.addEventListener('DOMContentLoaded', function() {
     // ... existing initialization code ...
     initializeLanguageDropdown();
 });
+
+// Navigation Drawer Functions
+function toggleDrawer() {
+    const drawer = document.getElementById('navigationDrawer');
+    const overlay = document.getElementById('drawerOverlay');
+    
+    if (drawer.classList.contains('active')) {
+        closeDrawer();
+    } else {
+        openDrawer();
+    }
+}
+
+function openDrawer() {
+    const drawer = document.getElementById('navigationDrawer');
+    const overlay = document.getElementById('drawerOverlay');
+    
+    drawer.classList.add('active');
+    overlay.classList.add('active');
+    
+    // Prevent body scroll when drawer is open
+    document.body.style.overflow = 'hidden';
+}
+
+function closeDrawer() {
+    const drawer = document.getElementById('navigationDrawer');
+    const overlay = document.getElementById('drawerOverlay');
+    
+    drawer.classList.remove('active');
+    overlay.classList.remove('active');
+    
+    // Restore body scroll
+    document.body.style.overflow = '';
+}
+
+// Enhanced selectService function to work with drawer
+function selectService(service) {
+    // Close drawer first
+    closeDrawer();
+    
+    // Small delay to allow drawer to close before showing service
+    setTimeout(() => {
+        showService(service);
+    }, 300);
+    
+    // Update active state in drawer nav
+    const navItems = document.querySelectorAll('.nav-item');
+    navItems.forEach(item => {
+        item.classList.remove('active');
+    });
+    
+    // Find and activate the corresponding nav item
+    const serviceMap = {
+        'checkin-guide': 'clipboard-check',
+        'online-checkin': 'mobile-alt',
+        'flight-info': 'plane-departure',
+        'faq': 'question-circle',
+        'offers': 'gift',
+        'home': 'home',
+        'settings': 'cog',
+        'info': 'info-circle',
+        'playground': 'gamepad'
+    };
+    
+    if (serviceMap[service]) {
+        const targetNavItem = document.querySelector(`.nav-item i.fa-${serviceMap[service]}`)?.parentElement;
+        if (targetNavItem) {
+            targetNavItem.classList.add('active');
+        }
+    }
+}

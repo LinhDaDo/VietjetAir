@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bản đồ hướng dẫn - VietJet Air</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+    <!-- Main Application Content -->
+    <div class="main-app map-page" style="display: block;">
+        <!-- Realistic Cloud Background -->
+        <div class="clouds"></div>
+
+        <!-- Header Section -->
+        <header class="header">
+            <div class="header-content">
+                <div class="logo-section">
+                    <div class="menu-icon" onclick="toggleDrawer()">
+                        <div class="menu-lines">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+                    </div>
+                    <div class="vietjet-logo">
+                        <img src="https://www.vietjetair.com/static/media/vj-logo.0f71c68b.svg" alt="VietJet Air" class="vietjet-logo-img">
+                    </div>
+                </div>
+                <h1 class="header-title">Bản đồ hướng dẫn<br><span style="font-size: 16px; font-weight: 400; opacity: 0.8;">Guiding Map</span></h1>
+                <div class="airport-info">
+                    <div class="language-dropdown">
+                        <div class="selected-language" id="selectedLanguage">
+                            <img src="https://flagcdn.com/w20/vn.png" alt="Vietnam" class="flag-icon">
+                            <span>VI</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="language-options" id="languageOptions">
+                            <div class="language-option" data-lang="vi">
+                                <img src="https://flagcdn.com/w20/vn.png" alt="Vietnam" class="flag-icon">
+                                <span>VI</span>
+                            </div>
+                            <div class="language-option" data-lang="en">
+                                <img src="https://flagcdn.com/w20/gb.png" alt="United Kingdom" class="flag-icon">
+                                <span>EN</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="time-display" id="currentTime"></div>
+                    <div class="weather-info">
+                        <i class="fas fa-sun"></i>
+                        <span>28°C</span>
+                    </div>
+                    <div class="battery-info" id="batteryInfo">
+                        <i class="fas fa-battery-three-quarters" id="batteryIcon"></i>
+                        <span id="batteryPercentage">85%</span>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Navigation Drawer -->
+        <div class="drawer-overlay" id="drawerOverlay" onclick="closeDrawer()"></div>
+        <div class="drawer" id="navigationDrawer">
+            <div class="drawer-header">
+                <div class="drawer-logo">
+                    <img src="https://www.vietjetair.com/static/media/vj-logo.0f71c68b.svg" alt="VietJet Air" class="drawer-logo-img">
+                </div>
+                <button class="drawer-close" onclick="closeDrawer()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="drawer-content">
+                <nav class="drawer-nav">
+                    <a href="index.html" class="nav-item">
+                        <i class="fas fa-home"></i>
+                        <span>Trang chủ</span>
+                    </a>
+                    <a href="settings.html" class="nav-item">
+                        <i class="fas fa-cog"></i>
+                        <span>Cài đặt</span>
+                    </a>
+                    <a href="info.html" class="nav-item">
+                        <i class="fas fa-info-circle"></i>
+                        <span>Thông tin</span>
+                    </a>
+                    <a href="#" class="nav-item">
+                        <i class="fas fa-gamepad"></i>
+                        <span>Playground</span>
+                    </a>
+                    <div class="nav-divider"></div>
+                    <a href="#" class="nav-item">
+                        <i class="fas fa-headset"></i>
+                        <span>Hỗ trợ khách hàng</span>
+                    </a>
+                    <a href="#" class="nav-item">
+                        <i class="fas fa-phone"></i>
+                        <span>Thông tin liên hệ</span>
+                    </a>
+                </nav>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Map Content -->
+            <section class="map-page-content">
+                <div class="map-container-page">
+                    <div class="map-legend">
+                        <h4><i class="fas fa-info-circle"></i> Chú thích bản đồ</h4>
+                        <div class="legend-item">
+                            <div class="legend-color checkin"></div>
+                            <span>Quầy check-in VietJet</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-color security"></div>
+                            <span>Kiểm tra an ninh</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-color gate"></div>
+                            <span>Cổng lên máy bay</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-color facilities"></div>
+                            <span>Tiện ích</span>
+                        </div>
+                    </div>
+                    
+                    <div class="airport-map-page">
+                        <div class="map-header">
+                            <h3><i class="fas fa-map-marked-alt"></i> Bản đồ sân bay Tân Sơn Nhất</h3>
+                            <p>Sân bay Quốc tế Tân Sơn Nhất - TP. Hồ Chí Minh</p>
+                        </div>
+                        
+                        <div class="map-areas">
+                            <div class="area checkin-area" data-area="checkin-vietjet">
+                                <div class="area-icon">
+                                    <i class="fas fa-check-circle"></i>
+                                </div>
+                                <div class="area-content">
+                                    <h5>Check-in A-F</h5>
+                                    <p>VietJet Air</p>
+                                </div>
+                            </div>
+                            
+                            <div class="area checkin-area" data-area="checkin-other">
+                                <div class="area-icon">
+                                    <i class="fas fa-clipboard-check"></i>
+                                </div>
+                                <div class="area-content">
+                                    <h5>Check-in G-L</h5>
+                                    <p>Hãng khác</p>
+                                </div>
+                            </div>
+                            
+                            <div class="area security-area" data-area="security">
+                                <div class="area-icon">
+                                    <i class="fas fa-shield-alt"></i>
+                                </div>
+                                <div class="area-content">
+                                    <h5>Kiểm tra</h5>
+                                    <p>An ninh</p>
+                                </div>
+                            </div>
+                            
+                            <div class="area gate-area" data-area="domestic-gates">
+                                <div class="area-icon">
+                                    <i class="fas fa-plane-departure"></i>
+                                </div>
+                                <div class="area-content">
+                                    <h5>Cổng đối</h5>
+                                    <p>Nội địa</p>
+                                </div>
+                            </div>
+                            
+                            <div class="area gate-area" data-area="international-gates">
+                                <div class="area-icon">
+                                    <i class="fas fa-globe"></i>
+                                </div>
+                                <div class="area-content">
+                                    <h5>Cổng đối</h5>
+                                    <p>Quốc tế</p>
+                                </div>
+                            </div>
+                            
+                            <div class="area facilities-area" data-area="facilities">
+                                <div class="area-icon">
+                                    <i class="fas fa-utensils"></i>
+                                </div>
+                                <div class="area-content">
+                                    <h5>Nhà hàng</h5>
+                                    <p>Cửa hàng</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Quick Navigation -->
+                <section class="quick-navigation">
+                    <h4><i class="fas fa-compass"></i> Điều hướng nhanh</h4>
+                    <div class="nav-buttons">
+                        <button class="nav-btn" onclick="highlightArea('checkin-vietjet')">
+                            <i class="fas fa-map-marker-alt"></i>
+                            <span>Quầy VietJet</span>
+                        </button>
+                        <button class="nav-btn" onclick="highlightArea('security')">
+                            <i class="fas fa-search"></i>
+                            <span>Kiểm tra an ninh</span>
+                        </button>
+                        <button class="nav-btn" onclick="highlightArea('domestic-gates')">
+                            <i class="fas fa-plane"></i>
+                            <span>Cổng nội địa</span>
+                        </button>
+                        <button class="nav-btn" onclick="highlightArea('facilities')">
+                            <i class="fas fa-shopping-bag"></i>
+                            <span>Tiện ích</span>
+                        </button>
+                    </div>
+                </section>
+                
+                <!-- Important Notes -->
+                <section class="important-notes">
+                    <h4><i class="fas fa-exclamation-triangle"></i> Lưu ý quan trọng</h4>
+                    <div class="notes-grid">
+                        <div class="note-item">
+                            <div class="note-icon">
+                                <i class="fas fa-clock"></i>
+                            </div>
+                            <div class="note-content">
+                                <h5>Thời gian check-in</h5>
+                                <p>Nội địa: 3 tiếng - 45 phút trước giờ bay<br>Quốc tế: 3 tiếng - 60 phút trước giờ bay</p>
+                            </div>
+                        </div>
+                        
+                        <div class="note-item">
+                            <div class="note-icon">
+                                <i class="fas fa-id-card"></i>
+                            </div>
+                            <div class="note-content">
+                                <h5>Giấy tờ cần thiết</h5>
+                                <p>CCCD/Hộ chiếu (bản gốc)<br>Vé điện tử hoặc mã đặt chỗ</p>
+                            </div>
+                        </div>
+                        
+                        <div class="note-item">
+                            <div class="note-icon">
+                                <i class="fas fa-suitcase"></i>
+                            </div>
+                            <div class="note-content">
+                                <h5>Hành lý</h5>
+                                <p>Xách tay: 7kg, 56x36x23cm<br>Ký gửi: 20kg (có thể mua thêm)</p>
+                            </div>
+                        </div>
+                        
+                        <div class="note-item">
+                            <div class="note-icon">
+                                <i class="fas fa-mobile-alt"></i>
+                            </div>
+                            <div class="note-content">
+                                <h5>Check-in trực tuyến</h5>
+                                <p>App VietJet Air hoặc website<br>Tiết kiệm thời gian tại sân bay</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </section>
+        </main>
+
+        <!-- Back Button -->
+        <button class="back-btn" onclick="goBackToHome()">
+            <i class="fas fa-arrow-left"></i>
+            Về trang chủ
+        </button>
+
+        <!-- VietJet Floating Icon -->
+        <div class="vietjet-float-icon" id="vietjetFloatIcon">
+            <img src="https://cdn-media.vinbase.ai/chat-widget/vietjet-external/assets/images/logo-vj.png" alt="VietJet Air"
+                class="vj-logo-icon"
+                onerror="this.src='https://upload.wikimedia.org/wikipedia/commons/thumb/4/47/VietJet_Air_logo.svg/200px-VietJet_Air_logo.svg.png'">
+            <div class="pulse-rng"></div>
+        </div>
+
+        <!-- Scripts -->
+        <script src="script.js"></script>
+        <script src="map.js"></script>
+    </div>
+    <!-- End Main App -->
+</body>
+
+</html>
