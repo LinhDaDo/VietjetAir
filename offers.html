@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ưu đãi & Thành viên - VietJet Air</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+    <!-- Loading Screen -->
+    <div class="loading-screen" id="loadingScreen">
+        <div class="loading-content">
+            <div class="loading-logo">
+                <img src="https://www.vietjetair.com/static/media/vj-logo.0f71c68b.svg" alt="VietJet Air" class="loading-logo-img">
+            </div>
+            <div class="loading-spinner">
+                <div class="spinner-ring"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Application Content -->
+    <div class="main-app" id="mainApp" style="display: none;">
+        <!-- Realistic Cloud Background -->
+        <div class="clouds"></div>
+
+        <!-- Header Section -->
+        <header class="header">
+            <div class="header-content">
+                <div class="logo-section">
+                    <div class="menu-icon" onclick="toggleDrawer()">
+                        <div class="menu-lines">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+                    </div>
+                    <div class="vietjet-logo">
+                        <img src="https://www.vietjetair.com/static/media/vj-logo.0f71c68b.svg" alt="VietJet Air" class="vietjet-logo-img">
+                    </div>
+                </div>
+                <h1 class="header-title">Ưu đãi & Thành viên<br><span style="font-size: 16px; font-weight: 400; opacity: 0.8;">Promotions & Members</span></h1>
+                <div class="airport-info">
+                    <div class="language-dropdown">
+                        <div class="selected-language" id="selectedLanguage">
+                            <img src="https://flagcdn.com/w20/vn.png" alt="Vietnam" class="flag-icon">
+                            <span>VI</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="language-options" id="languageOptions">
+                            <div class="language-option" data-lang="vi">
+                                <img src="https://flagcdn.com/w20/vn.png" alt="Vietnam" class="flag-icon">
+                                <span>VI</span>
+                            </div>
+                            <div class="language-option" data-lang="en">
+                                <img src="https://flagcdn.com/w20/gb.png" alt="United Kingdom" class="flag-icon">
+                                <span>EN</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="time-display" id="currentTime"></div>
+                    <div class="weather-info">
+                        <i class="fas fa-sun"></i>
+                        <span>28°C</span>
+                    </div>
+                    <div class="battery-info" id="batteryInfo">
+                        <i class="fas fa-battery-three-quarters" id="batteryIcon"></i>
+                        <span id="batteryPercentage">85%</span>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Navigation Drawer -->
+        <div class="drawer-overlay" id="drawerOverlay" onclick="closeDrawer()"></div>
+        <div class="drawer" id="navigationDrawer">
+            <div class="drawer-header">
+                <div class="drawer-logo">
+                    <img src="https://www.vietjetair.com/static/media/vj-logo.0f71c68b.svg" alt="VietJet Air" class="drawer-logo-img">
+                </div>
+                <button class="drawer-close" onclick="closeDrawer()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="drawer-content">
+                <nav class="drawer-nav">
+                    <a href="index.html" class="nav-item">
+                        <i class="fas fa-home"></i>
+                        <span>Trang chủ</span>
+                    </a>
+                    <a href="settings.html" class="nav-item">
+                        <i class="fas fa-cog"></i>
+                        <span>Cài đặt</span>
+                    </a>
+                    <a href="info.html" class="nav-item">
+                        <i class="fas fa-info-circle"></i>
+                        <span>Thông tin</span>
+                    </a>
+                    <a href="#" class="nav-item" onclick="selectService('playground')">
+                        <i class="fas fa-gamepad"></i>
+                        <span>Playground</span>
+                    </a>
+                    <div class="nav-divider"></div>
+                    <a href="support.html" class="nav-item">
+                        <i class="fas fa-headset"></i>
+                        <span>Hỗ trợ khách hàng</span>
+                    </a>
+                    <a href="contact.html" class="nav-item">
+                        <i class="fas fa-phone"></i>
+                        <span>Thông tin liên hệ</span>
+                    </a>
+                </nav>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <section class="page-content">
+                <div class="page-header">
+                    <div class="page-icon">
+                        <i class="fas fa-gift"></i>
+                    </div>
+                    <div class="page-title">
+                        <h2>Ưu đãi và Thành viên</h2>
+                        <p>Khám phá các ưu đãi hấp dẫn và quyền lợi thành viên</p>
+                    </div>
+                </div>
+
+                <!-- Featured Offers -->
+                <div class="featured-offers">
+                    <h3><i class="fas fa-fire"></i> Ưu đãi nổi bật</h3>
+                    <div class="offers-carousel">
+                        <div class="offer-slide active">
+                            <div class="offer-banner">
+                                <div class="offer-content">
+                                    <div class="offer-badge">HOT</div>
+                                    <h4>Giảm 50% cho chuyến bay nội địa</h4>
+                                    <p>Áp dụng cho tất cả các tuyến bay trong nước</p>
+                                    <div class="offer-validity">Có hiệu lực đến 31/12/2024</div>
+                                    <button class="offer-btn">Đặt ngay</button>
+                                </div>
+                                <div class="offer-image">
+                                    <i class="fas fa-plane"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Membership Section -->
+                <div class="membership-section">
+                    <h3><i class="fas fa-star"></i> Chương trình thành viên SkyJoy</h3>
+                    <div class="membership-tiers">
+                        <div class="tier-card basic">
+                            <div class="tier-header">
+                                <i class="fas fa-user"></i>
+                                <h4>SkyJoy Basic</h4>
+                                <p>Miễn phí</p>
+                            </div>
+                            <div class="tier-benefits">
+                                <div class="benefit">
+                                    <i class="fas fa-check"></i>
+                                    <span>Tích điểm cơ bản</span>
+                                </div>
+                                <div class="benefit">
+                                    <i class="fas fa-check"></i>
+                                    <span>Ưu đãi thành viên</span>
+                                </div>
+                                <div class="benefit">
+                                    <i class="fas fa-check"></i>
+                                    <span>Thông báo khuyến mãi</span>
+                                </div>
+                            </div>
+                            <button class="tier-btn">Đăng ký ngay</button>
+                        </div>
+
+                        <div class="tier-card silver">
+                            <div class="tier-header">
+                                <i class="fas fa-medal"></i>
+                                <h4>SkyJoy Silver</h4>
+                                <p>50 chuyến bay/năm</p>
+                            </div>
+                            <div class="tier-benefits">
+                                <div class="benefit">
+                                    <i class="fas fa-check"></i>
+                                    <span>Tích điểm x1.5</span>
+                                </div>
+                                <div class="benefit">
+                                    <i class="fas fa-check"></i>
+                                    <span>Ưu tiên check-in</span>
+                                </div>
+                                <div class="benefit">
+                                    <i class="fas fa-check"></i>
+                                    <span>Hành lý bổ sung 5kg</span>
+                                </div>
+                                <div class="benefit">
+                                    <i class="fas fa-check"></i>
+                                    <span>Chọn chỗ ngồi miễn phí</span>
+                                </div>
+                            </div>
+                            <button class="tier-btn">Tìm hiểu thêm</button>
+                        </div>
+
+                        <div class="tier-card gold">
+                            <div class="tier-header">
+                                <i class="fas fa-crown"></i>
+                                <h4>SkyJoy Gold</h4>
+                                <p>100 chuyến bay/năm</p>
+                            </div>
+                            <div class="tier-benefits">
+                                <div class="benefit">
+                                    <i class="fas fa-check"></i>
+                                    <span>Tích điểm x2</span>
+                                </div>
+                                <div class="benefit">
+                                    <i class="fas fa-check"></i>
+                                    <span>Lounge miễn phí</span>
+                                </div>
+                                <div class="benefit">
+                                    <i class="fas fa-check"></i>
+                                    <span>Hành lý bổ sung 10kg</span>
+                                </div>
+                                <div class="benefit">
+                                    <i class="fas fa-check"></i>
+                                    <span>Ưu tiên lên máy bay</span>
+                                </div>
+                                <div class="benefit">
+                                    <i class="fas fa-check"></i>
+                                    <span>Hỗ trợ 24/7</span>
+                                </div>
+                            </div>
+                            <button class="tier-btn">Tìm hiểu thêm</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Current Offers Grid -->
+                <div class="offers-grid-section">
+                    <h3><i class="fas fa-tags"></i> Ưu đãi hiện tại</h3>
+                    <div class="offers-grid">
+                        <div class="offer-card">
+                            <div class="offer-icon">
+                                <i class="fas fa-percentage"></i>
+                            </div>
+                            <h4>Vé giá rẻ</h4>
+                            <p>Giảm đến 50% cho các tuyến bay nội địa</p>
+                            <div class="offer-code">Mã: SAVE50</div>
+                            <button class="offer-btn">Xem ngay</button>
+                        </div>
+
+                        <div class="offer-card">
+                            <div class="offer-icon">
+                                <i class="fas fa-suitcase"></i>
+                            </div>
+                            <h4>Tour trọn gói</h4>
+                            <p>Vé máy bay + Khách sạn giá ưu đãi</p>
+                            <div class="offer-code">Mã: COMBO2024</div>
+                            <button class="offer-btn">Khám phá</button>
+                        </div>
+
+                        <div class="offer-card">
+                            <div class="offer-icon">
+                                <i class="fas fa-credit-card"></i>
+                            </div>
+                            <h4>Thẻ tín dụng VietJet</h4>
+                            <p>Hoàn tiền và ưu đãi đặc biệt</p>
+                            <div class="offer-code">Miễn phí năm đầu</div>
+                            <button class="offer-btn">Tìm hiểu</button>
+                        </div>
+
+                        <div class="offer-card">
+                            <div class="offer-icon">
+                                <i class="fas fa-birthday-cake"></i>
+                            </div>
+                            <h4>Ưu đãi sinh nhật</h4>
+                            <p>Giảm giá đặc biệt trong tháng sinh nhật</p>
+                            <div class="offer-code">Dành cho thành viên</div>
+                            <button class="offer-btn">Nhận ưu đãi</button>
+                        </div>
+
+                        <div class="offer-card">
+                            <div class="offer-icon">
+                                <i class="fas fa-heart"></i>
+                            </div>
+                            <h4>Bay cùng người yêu</h4>
+                            <p>Ưu đãi đặc biệt cho cặp đôi</p>
+                            <div class="offer-code">Mã: LOVE2024</div>
+                            <button class="offer-btn">Đặt ngay</button>
+                        </div>
+
+                        <div class="offer-card">
+                            <div class="offer-icon">
+                                <i class="fas fa-graduation-cap"></i>
+                            </div>
+                            <h4>Sinh viên</h4>
+                            <p>Giảm giá cho sinh viên, học sinh</p>
+                            <div class="offer-code">Mã: STUDENT</div>
+                            <button class="offer-btn">Xem điều kiện</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Points Calculator -->
+                <div class="points-calculator">
+                    <h3><i class="fas fa-calculator"></i> Tính điểm thưởng</h3>
+                    <div class="calculator-container">
+                        <div class="calculator-input">
+                            <label>Giá vé (VNĐ)</label>
+                            <input type="number" id="ticketPrice" placeholder="Nhập giá vé" onkeyup="calculatePoints()">
+                        </div>
+                        <div class="calculator-input">
+                            <label>Hạng thành viên</label>
+                            <select id="memberTier" onchange="calculatePoints()">
+                                <option value="1">Basic (x1)</option>
+                                <option value="1.5">Silver (x1.5)</option>
+                                <option value="2">Gold (x2)</option>
+                            </select>
+                        </div>
+                        <div class="calculator-result">
+                            <h4>Điểm tích được: <span id="pointsResult">0</span></h4>
+                            <p>Tương đương: <span id="valueResult">0</span> VNĐ</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- How to Use Points -->
+                <div class="points-usage">
+                    <h3><i class="fas fa-coins"></i> Cách sử dụng điểm</h3>
+                    <div class="usage-grid">
+                        <div class="usage-item">
+                            <i class="fas fa-ticket-alt"></i>
+                            <h4>Đổi vé máy bay</h4>
+                            <p>10,000 điểm = 100,000 VNĐ</p>
+                        </div>
+                        <div class="usage-item">
+                            <i class="fas fa-arrow-up"></i>
+                            <h4>Nâng hạng ghế</h4>
+                            <p>5,000 điểm = Nâng lên SkyBoss</p>
+                        </div>
+                        <div class="usage-item">
+                            <i class="fas fa-suitcase"></i>
+                            <h4>Hành lý bổ sung</h4>
+                            <p>2,000 điểm = 10kg hành lý</p>
+                        </div>
+                        <div class="usage-item">
+                            <i class="fas fa-utensils"></i>
+                            <h4>Suất ăn</h4>
+                            <p>1,500 điểm = 1 suất ăn</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Newsletter Signup -->
+                <div class="newsletter-signup">
+                    <h3><i class="fas fa-envelope"></i> Đăng ký nhận tin</h3>
+                    <p>Nhận thông báo về các ưu đãi và khuyến mãi mới nhất</p>
+                    <div class="signup-form">
+                        <input type="email" placeholder="Nhập email của bạn" id="newsletterEmail">
+                        <button onclick="subscribeNewsletter()">Đăng ký</button>
+                    </div>
+                    <div class="signup-benefits">
+                        <div class="signup-benefit">
+                            <i class="fas fa-bell"></i>
+                            <span>Ưu đãi độc quyền</span>
+                        </div>
+                        <div class="signup-benefit">
+                            <i class="fas fa-gift"></i>
+                            <span>Quà tặng sinh nhật</span>
+                        </div>
+                        <div class="signup-benefit">
+                            <i class="fas fa-plane"></i>
+                            <span>Thông báo chuyến bay</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Back Button -->
+        <button class="back-btn" id="backBtn" onclick="goToHomePage()">
+            <i class="fas fa-arrow-left"></i>
+            Về trang chủ
+        </button>
+    </div>
+
+    <!-- Scripts -->
+    <script src="script.js"></script>
+</body>
+
+</html>

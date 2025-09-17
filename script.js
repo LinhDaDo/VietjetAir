@@ -104,14 +104,7 @@ function getCurrentTimestamp() {
 
 // Setup event listeners
 function setupEventListeners() {
-    // Service card click handlers
-    const serviceCards = document.querySelectorAll('.service-card');
-    serviceCards.forEach(card => {
-        card.addEventListener('click', function() {
-            const service = this.getAttribute('data-service');
-            showService(service);
-        });
-    });
+    // Note: Service card click handlers removed since cards now redirect to separate pages
     
     // Chat input enter key
     const chatInput = document.getElementById('chatInput');
@@ -900,4 +893,192 @@ function selectService(service) {
             targetNavItem.classList.add('active');
         }
     }
+}
+
+// New Pages Specific Functions
+function performOnlineCheckin() {
+    const bookingNumber = document.getElementById('bookingNumber')?.value;
+    const passengerName = document.getElementById('passengerName')?.value;
+    
+    if (!bookingNumber || !passengerName) {
+        const message = currentLanguage === 'vi' ? 
+            'Vui lòng nhập đầy đủ mã đặt chỗ và họ tên.' : 
+            'Please enter both booking number and passenger name.';
+        alert(message);
+        return;
+    }
+    
+    // Simulate check-in process
+    const processingMessage = currentLanguage === 'vi' ? 
+        `Đang xử lý check-in cho ${passengerName}. Vui lòng chờ...` : 
+        `Processing check-in for ${passengerName}. Please wait...`;
+    alert(processingMessage);
+    
+    setTimeout(() => {
+        const successMessage = currentLanguage === 'vi' ? 
+            'Check-in thành công! Bạn có thể in thẻ lên máy bay hoặc lưu vào điện thoại.' : 
+            'Check-in successful! You can print your boarding pass or save it to your mobile.';
+        alert(successMessage);
+        // Clear form
+        if (document.getElementById('bookingNumber')) document.getElementById('bookingNumber').value = '';
+        if (document.getElementById('passengerName')) document.getElementById('passengerName').value = '';
+    }, 2000);
+}
+
+function showAppDownload() {
+    alert('Tải ứng dụng VietJet Air:\n\n- iOS: App Store\n- Android: Google Play Store\n\nTìm kiếm "VietJet Air" để tải về!');
+}
+
+function searchFlight() {
+    const searchInput = document.getElementById('flightSearch');
+    if (!searchInput) return;
+    
+    const searchTerm = searchInput.value.trim().toLowerCase();
+    
+    if (!searchTerm) {
+        const message = currentLanguage === 'vi' ? 
+            'Vui lòng nhập số hiệu chuyến bay hoặc điểm đến.' : 
+            'Please enter flight number or destination.';
+        alert(message);
+        return;
+    }
+    
+    // Simulate flight search
+    const flightRows = document.querySelectorAll('.flight-row:not(.header)');
+    let found = false;
+    
+    flightRows.forEach(row => {
+        const flightNumber = row.children[0]?.textContent.toLowerCase() || '';
+        const destination = row.children[1]?.textContent.toLowerCase() || '';
+        
+        if (flightNumber.includes(searchTerm) || destination.includes(searchTerm)) {
+            row.style.display = 'grid';
+            row.style.backgroundColor = '#fff3cd';
+            found = true;
+        } else {
+            row.style.display = 'none';
+        }
+    });
+    
+    if (!found) {
+        const message = currentLanguage === 'vi' ? 
+            'Không tìm thấy kết quả. Vui lòng thử lại.' : 
+            'No results found. Please try again.';
+        alert(message);
+        // Reset display
+        flightRows.forEach(row => {
+            row.style.display = 'grid';
+            row.style.backgroundColor = '';
+        });
+    }
+}
+
+function showFlightDetails(flightNumber) {
+    alert(`Chi tiết chuyến bay ${flightNumber}:
+
+Chức năng này sẽ sớm được cập nhật với thông tin chi tiết về:
+- Thời gian khởi hành/đến
+- Loại máy bay
+- Dịch vụ trên chuyến bay
+- Thông tin hành lý`);
+}
+
+function checkMyFlight() {
+    const bookingCode = prompt('Nhập mã đặt chỗ của bạn (6 ký tự):');
+    if (bookingCode && bookingCode.length === 6) {
+        alert(`Đang kiểm tra thông tin vé với mã: ${bookingCode}\n\nChức năng này sẽ sớm được tích hợp với hệ thống đặt vé thực tế.`);
+    } else if (bookingCode) {
+        alert('Mã đặt chỗ phải có đúng 6 ký tự. Vui lòng thử lại.');
+    }
+}
+
+function flightNotifications() {
+    alert('Đăng ký thông báo chuyến bay:\n\nBạn có thể nhận thông báo về:\n- Thay đổi giờ khởi hành\n- Thông tin cổng lên máy bay\n- Tình trạng chuyến bay\n\nChức năng sẽ sớm được ra mắt!');
+}
+
+function weatherInfo() {
+    alert('Thông tin thời tiết:\n\n- TP. Hồ Chí Minh: 28°C, Nắng\n- Hà Nội: 25°C, Nhiều mây\n- Đà Nẵng: 27°C, Nắng\n- Phú Quốc: 29°C, Nắng\n\nCập nhật chi tiết sẽ sớm có!');
+}
+
+function filterFAQ() {
+    const searchTerm = document.getElementById('faqSearch')?.value.toLowerCase() || '';
+    const faqItems = document.querySelectorAll('.faq-item');
+    
+    faqItems.forEach(item => {
+        const question = item.querySelector('.faq-question span')?.textContent.toLowerCase() || '';
+        const answer = item.querySelector('.faq-answer')?.textContent.toLowerCase() || '';
+        
+        if (question.includes(searchTerm) || answer.includes(searchTerm)) {
+            item.style.display = 'block';
+        } else {
+            item.style.display = searchTerm ? 'none' : 'block';
+        }
+    });
+}
+
+function filterByCategory(category) {
+    const faqItems = document.querySelectorAll('.faq-item');
+    const filterButtons = document.querySelectorAll('.category-filter');
+    
+    // Update active button
+    filterButtons.forEach(btn => btn.classList.remove('active'));
+    event.target.classList.add('active');
+    
+    // Filter items
+    faqItems.forEach(item => {
+        const itemCategory = item.getAttribute('data-category');
+        if (category === 'all' || itemCategory === category) {
+            item.style.display = 'block';
+        } else {
+            item.style.display = 'none';
+        }
+    });
+}
+
+function openLiveChat() {
+    alert('Đang kết nối với nhân viên hỗ trợ...\nChức năng chat trực tuyến sẽ sớm được ra mắt!');
+}
+
+function calculatePoints() {
+    const ticketPrice = parseFloat(document.getElementById('ticketPrice')?.value || 0);
+    const memberTier = parseFloat(document.getElementById('memberTier')?.value || 1);
+    
+    if (ticketPrice > 0) {
+        const points = Math.round((ticketPrice / 1000) * memberTier);
+        const value = points * 10; // 1 point = 10 VND
+        
+        if (document.getElementById('pointsResult')) {
+            document.getElementById('pointsResult').textContent = points.toLocaleString();
+        }
+        if (document.getElementById('valueResult')) {
+            document.getElementById('valueResult').textContent = value.toLocaleString();
+        }
+    } else {
+        if (document.getElementById('pointsResult')) {
+            document.getElementById('pointsResult').textContent = '0';
+        }
+        if (document.getElementById('valueResult')) {
+            document.getElementById('valueResult').textContent = '0';
+        }
+    }
+}
+
+function subscribeNewsletter() {
+    const email = document.getElementById('newsletterEmail')?.value;
+    if (email && email.includes('@')) {
+        alert(`Cảm ơn bạn đã đăng ký!
+
+Email ${email} đã được thêm vào danh sách nhận tin.
+
+Bạn sẽ nhận được các ưu đãi và thông báo mới nhất từ VietJet Air.`);
+        if (document.getElementById('newsletterEmail')) {
+            document.getElementById('newsletterEmail').value = '';
+        }
+    } else {
+        alert('Vui lòng nhập địa chỉ email hợp lệ.');
+    }
+}
+
+function goToHomePage() {
+    window.location.href = 'index.html';
 }

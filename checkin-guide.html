@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hướng dẫn check-in - VietJet Air</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+    <!-- Loading Screen -->
+    <div class="loading-screen" id="loadingScreen">
+        <div class="loading-content">
+            <div class="loading-logo">
+                <img src="https://www.vietjetair.com/static/media/vj-logo.0f71c68b.svg" alt="VietJet Air" class="loading-logo-img">
+            </div>
+            <div class="loading-spinner">
+                <div class="spinner-ring"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Application Content -->
+    <div class="main-app" id="mainApp" style="display: none;">
+        <!-- Realistic Cloud Background -->
+        <div class="clouds"></div>
+
+        <!-- Header Section -->
+        <header class="header">
+            <div class="header-content">
+                <div class="logo-section">
+                    <div class="menu-icon" onclick="toggleDrawer()">
+                        <div class="menu-lines">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+                    </div>
+                    <div class="vietjet-logo">
+                        <img src="https://www.vietjetair.com/static/media/vj-logo.0f71c68b.svg" alt="VietJet Air" class="vietjet-logo-img">
+                    </div>
+                </div>
+                <h1 class="header-title">Hướng dẫn check-in<br><span style="font-size: 16px; font-weight: 400; opacity: 0.8;">Check-in Guide</span></h1>
+                <div class="airport-info">
+                    <div class="language-dropdown">
+                        <div class="selected-language" id="selectedLanguage">
+                            <img src="https://flagcdn.com/w20/vn.png" alt="Vietnam" class="flag-icon">
+                            <span>VI</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="language-options" id="languageOptions">
+                            <div class="language-option" data-lang="vi">
+                                <img src="https://flagcdn.com/w20/vn.png" alt="Vietnam" class="flag-icon">
+                                <span>VI</span>
+                            </div>
+                            <div class="language-option" data-lang="en">
+                                <img src="https://flagcdn.com/w20/gb.png" alt="United Kingdom" class="flag-icon">
+                                <span>EN</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="time-display" id="currentTime"></div>
+                    <div class="weather-info">
+                        <i class="fas fa-sun"></i>
+                        <span>28°C</span>
+                    </div>
+                    <div class="battery-info" id="batteryInfo">
+                        <i class="fas fa-battery-three-quarters" id="batteryIcon"></i>
+                        <span id="batteryPercentage">85%</span>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Navigation Drawer -->
+        <div class="drawer-overlay" id="drawerOverlay" onclick="closeDrawer()"></div>
+        <div class="drawer" id="navigationDrawer">
+            <div class="drawer-header">
+                <div class="drawer-logo">
+                    <img src="https://www.vietjetair.com/static/media/vj-logo.0f71c68b.svg" alt="VietJet Air" class="drawer-logo-img">
+                </div>
+                <button class="drawer-close" onclick="closeDrawer()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="drawer-content">
+                <nav class="drawer-nav">
+                    <a href="index.html" class="nav-item">
+                        <i class="fas fa-home"></i>
+                        <span>Trang chủ</span>
+                    </a>
+                    <a href="settings.html" class="nav-item">
+                        <i class="fas fa-cog"></i>
+                        <span>Cài đặt</span>
+                    </a>
+                    <a href="info.html" class="nav-item">
+                        <i class="fas fa-info-circle"></i>
+                        <span>Thông tin</span>
+                    </a>
+                    <a href="#" class="nav-item" onclick="selectService('playground')">
+                        <i class="fas fa-gamepad"></i>
+                        <span>Playground</span>
+                    </a>
+                    <div class="nav-divider"></div>
+                    <a href="support.html" class="nav-item">
+                        <i class="fas fa-headset"></i>
+                        <span>Hỗ trợ khách hàng</span>
+                    </a>
+                    <a href="contact.html" class="nav-item">
+                        <i class="fas fa-phone"></i>
+                        <span>Thông tin liên hệ</span>
+                    </a>
+                </nav>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <section class="page-content">
+                <div class="page-header">
+                    <div class="page-icon">
+                        <i class="fas fa-clipboard-check"></i>
+                    </div>
+                    <div class="page-title">
+                        <h2>Hướng dẫn check-in VietJet Air</h2>
+                        <p>Quy trình làm thủ tục check-in chi tiết</p>
+                    </div>
+                </div>
+
+                <!-- Check-in Steps -->
+                <div class="checkin-steps">
+                    <div class="step">
+                        <div class="step-number">1</div>
+                        <div class="step-content">
+                            <h4>Chuẩn bị giấy tờ</h4>
+                            <p>Mã đặt chỗ (PNR), CCCD/Hộ chiếu hoặc email xác nhận đặt vé</p>
+                            <ul class="step-details">
+                                <li>Mã đặt chỗ 6 ký tự (VD: ABC123)</li>
+                                <li>CCCD/Hộ chiếu còn hạn (bản gốc)</li>
+                                <li>Vé điện tử hoặc email xác nhận</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">2</div>
+                        <div class="step-content">
+                            <h4>Đến quầy check-in</h4>
+                            <p>Tìm quầy VietJet Air (A-F) hoặc sử dụng ki-ốt tự động</p>
+                            <ul class="step-details">
+                                <li>Quầy A-F dành cho VietJet Air</li>
+                                <li>Ki-ốt tự động (Self check-in)</li>
+                                <li>Mở cửa: 3 tiếng trước giờ bay</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">3</div>
+                        <div class="step-content">
+                            <h4>Làm thủ tục</h4>
+                            <p>Xuất trình giấy tờ, chọn chỗ ngồi, gửi hành lý ký gửi (nếu có)</p>
+                            <ul class="step-details">
+                                <li>Xuất trình giấy tờ tùy thân</li>
+                                <li>Chọn chỗ ngồi ưa thích</li>
+                                <li>Gửi hành lý ký gửi (nếu có)</li>
+                                <li>Thanh toán phí bổ sung (nếu có)</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">4</div>
+                        <div class="step-content">
+                            <h4>Nhận thẻ lên máy bay</h4>
+                            <p>Kiểm tra thông tin trên thẻ và thẻ hành lý (nếu có)</p>
+                            <ul class="step-details">
+                                <li>Kiểm tra tên hành khách</li>
+                                <li>Kiểm tra số hiệu chuyến bay</li>
+                                <li>Kiểm tra giờ khởi hành</li>
+                                <li>Kiểm tra cổng lên máy bay</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">5</div>
+                        <div class="step-content">
+                            <h4>Đi kiểm tra an ninh</h4>
+                            <p>Mang theo thẻ lên máy bay và giấy tờ để kiểm tra</p>
+                            <ul class="step-details">
+                                <li>Xuất trình thẻ lên máy bay</li>
+                                <li>Xuất trình CCCD/Hộ chiếu</li>
+                                <li>Kiểm tra an ninh hành lý</li>
+                                <li>Đến cổng lên máy bay</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="important-notes">
+                    <h4><i class="fas fa-exclamation-triangle"></i> Lưu ý quan trọng</h4>
+                    <div class="notes-grid">
+                        <div class="note-item">
+                            <i class="fas fa-clock"></i>
+                            <div>
+                                <h5>Thời gian check-in</h5>
+                                <p>Sớm nhất: 3 tiếng trước giờ bay<br>
+                                Muộn nhất: 45 phút (nội địa), 60 phút (quốc tế)</p>
+                            </div>
+                        </div>
+                        <div class="note-item">
+                            <i class="fas fa-id-card"></i>
+                            <div>
+                                <h5>Giấy tờ hợp lệ</h5>
+                                <p>Chỉ chấp nhận giấy tờ gốc<br>
+                                Bản sao, ảnh chụp không hợp lệ</p>
+                            </div>
+                        </div>
+                        <div class="note-item">
+                            <i class="fas fa-suitcase"></i>
+                            <div>
+                                <h5>Hành lý</h5>
+                                <p>Xách tay: 7kg, 56x36x23cm<br>
+                                Ký gửi: Theo gói vé đã mua</p>
+                            </div>
+                        </div>
+                        <div class="note-item">
+                            <i class="fas fa-baby"></i>
+                            <div>
+                                <h5>Hành khách đặc biệt</h5>
+                                <p>Trẻ em, người cao tuổi, khuyết tật<br>
+                                Liên hệ nhân viên để được hỗ trợ</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Quick Tips -->
+                <div class="quick-tips">
+                    <h4><i class="fas fa-lightbulb"></i> Mẹo hữu ích</h4>
+                    <div class="tips-list">
+                        <div class="tip-item">
+                            <i class="fas fa-mobile-alt"></i>
+                            <span>Sử dụng app VietJet Air để check-in online tiết kiệm thời gian</span>
+                        </div>
+                        <div class="tip-item">
+                            <i class="fas fa-clock"></i>
+                            <span>Đến sân bay sớm ít nhất 1.5 tiếng để tránh vội vã</span>
+                        </div>
+                        <div class="tip-item">
+                            <i class="fas fa-print"></i>
+                            <span>In sẵn thẻ lên máy bay tại nhà hoặc lưu vào điện thoại</span>
+                        </div>
+                        <div class="tip-item">
+                            <i class="fas fa-weight"></i>
+                            <span>Cân hành lý trước khi đến sân bay để tránh phí phụ thu</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Back Button -->
+        <button class="back-btn" id="backBtn" onclick="goToHomePage()">
+            <i class="fas fa-arrow-left"></i>
+            Về trang chủ
+        </button>
+    </div>
+
+    <!-- Scripts -->
+    <script src="script.js"></script>
+</body>
+
+</html>

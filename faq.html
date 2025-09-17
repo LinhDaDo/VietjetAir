@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Câu hỏi thường gặp - VietJet Air</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+    <!-- Loading Screen -->
+    <div class="loading-screen" id="loadingScreen">
+        <div class="loading-content">
+            <div class="loading-logo">
+                <img src="https://www.vietjetair.com/static/media/vj-logo.0f71c68b.svg" alt="VietJet Air" class="loading-logo-img">
+            </div>
+            <div class="loading-spinner">
+                <div class="spinner-ring"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Application Content -->
+    <div class="main-app" id="mainApp" style="display: none;">
+        <!-- Realistic Cloud Background -->
+        <div class="clouds"></div>
+
+        <!-- Header Section -->
+        <header class="header">
+            <div class="header-content">
+                <div class="logo-section">
+                    <div class="menu-icon" onclick="toggleDrawer()">
+                        <div class="menu-lines">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </div>
+                    </div>
+                    <div class="vietjet-logo">
+                        <img src="https://www.vietjetair.com/static/media/vj-logo.0f71c68b.svg" alt="VietJet Air" class="vietjet-logo-img">
+                    </div>
+                </div>
+                <h1 class="header-title">Câu hỏi thường gặp<br><span style="font-size: 16px; font-weight: 400; opacity: 0.8;">FAQs</span></h1>
+                <div class="airport-info">
+                    <div class="language-dropdown">
+                        <div class="selected-language" id="selectedLanguage">
+                            <img src="https://flagcdn.com/w20/vn.png" alt="Vietnam" class="flag-icon">
+                            <span>VI</span>
+                            <i class="fas fa-chevron-down"></i>
+                        </div>
+                        <div class="language-options" id="languageOptions">
+                            <div class="language-option" data-lang="vi">
+                                <img src="https://flagcdn.com/w20/vn.png" alt="Vietnam" class="flag-icon">
+                                <span>VI</span>
+                            </div>
+                            <div class="language-option" data-lang="en">
+                                <img src="https://flagcdn.com/w20/gb.png" alt="United Kingdom" class="flag-icon">
+                                <span>EN</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="time-display" id="currentTime"></div>
+                    <div class="weather-info">
+                        <i class="fas fa-sun"></i>
+                        <span>28°C</span>
+                    </div>
+                    <div class="battery-info" id="batteryInfo">
+                        <i class="fas fa-battery-three-quarters" id="batteryIcon"></i>
+                        <span id="batteryPercentage">85%</span>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Navigation Drawer -->
+        <div class="drawer-overlay" id="drawerOverlay" onclick="closeDrawer()"></div>
+        <div class="drawer" id="navigationDrawer">
+            <div class="drawer-header">
+                <div class="drawer-logo">
+                    <img src="https://www.vietjetair.com/static/media/vj-logo.0f71c68b.svg" alt="VietJet Air" class="drawer-logo-img">
+                </div>
+                <button class="drawer-close" onclick="closeDrawer()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="drawer-content">
+                <nav class="drawer-nav">
+                    <a href="index.html" class="nav-item">
+                        <i class="fas fa-home"></i>
+                        <span>Trang chủ</span>
+                    </a>
+                    <a href="settings.html" class="nav-item">
+                        <i class="fas fa-cog"></i>
+                        <span>Cài đặt</span>
+                    </a>
+                    <a href="info.html" class="nav-item">
+                        <i class="fas fa-info-circle"></i>
+                        <span>Thông tin</span>
+                    </a>
+                    <a href="#" class="nav-item" onclick="selectService('playground')">
+                        <i class="fas fa-gamepad"></i>
+                        <span>Playground</span>
+                    </a>
+                    <div class="nav-divider"></div>
+                    <a href="support.html" class="nav-item">
+                        <i class="fas fa-headset"></i>
+                        <span>Hỗ trợ khách hàng</span>
+                    </a>
+                    <a href="contact.html" class="nav-item">
+                        <i class="fas fa-phone"></i>
+                        <span>Thông tin liên hệ</span>
+                    </a>
+                </nav>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <section class="page-content">
+                <div class="page-header">
+                    <div class="page-icon">
+                        <i class="fas fa-question-circle"></i>
+                    </div>
+                    <div class="page-title">
+                        <h2>Câu hỏi thường gặp</h2>
+                        <p>Tìm câu trả lời cho những thắc mắc phổ biến</p>
+                    </div>
+                </div>
+
+                <!-- FAQ Search -->
+                <div class="faq-search">
+                    <div class="search-box">
+                        <i class="fas fa-search"></i>
+                        <input type="text" placeholder="Tìm kiếm câu hỏi..." id="faqSearch" onkeyup="filterFAQ()">
+                    </div>
+                </div>
+
+                <!-- FAQ Categories -->
+                <div class="faq-categories">
+                    <button class="category-filter active" onclick="filterByCategory('all')">Tất cả</button>
+                    <button class="category-filter" onclick="filterByCategory('checkin')">Check-in</button>
+                    <button class="category-filter" onclick="filterByCategory('baggage')">Hành lý</button>
+                    <button class="category-filter" onclick="filterByCategory('booking')">Đặt vé</button>
+                    <button class="category-filter" onclick="filterByCategory('flight')">Chuyến bay</button>
+                    <button class="category-filter" onclick="filterByCategory('other')">Khác</button>
+                </div>
+
+                <!-- FAQ List -->
+                <div class="faq-container">
+                    <div class="faq-list">
+                        <div class="faq-item" data-category="checkin">
+                            <div class="faq-question" onclick="toggleFAQ(this)">
+                                <span>Check-in có thể làm đến khi nào?</span>
+                                <i class="fas fa-chevron-down"></i>
+                            </div>
+                            <div class="faq-answer">
+                                <p><strong>Chuyến bay nội địa:</strong> 45 phút trước giờ bay<br>
+                                <strong>Chuyến bay quốc tế:</strong> 60 phút trước giờ bay</p>
+                                <p>Lưu ý: Thời gian này áp dụng cho cả check-in tại quầy và online.</p>
+                            </div>
+                        </div>
+
+                        <div class="faq-item" data-category="baggage">
+                            <div class="faq-question" onclick="toggleFAQ(this)">
+                                <span>Quy định hành lý như thế nào?</span>
+                                <i class="fas fa-chevron-down"></i>
+                            </div>
+                            <div class="faq-answer">
+                                <p><strong>Hành lý xách tay:</strong> 7kg, kích thước 56x36x23cm<br>
+                                <strong>Hành lý ký gửi:</strong> 20kg (có thể mua thêm)</p>
+                                <p>Không được mang chất lỏng quá 100ml lên máy bay. Các vật phẩm nguy hiểm bị cấm hoàn toàn.</p>
+                            </div>
+                        </div>
+
+                        <div class="faq-item" data-category="checkin">
+                            <div class="faq-question" onclick="toggleFAQ(this)">
+                                <span>Làm sao để đổi chỗ ngồi?</span>
+                                <i class="fas fa-chevron-down"></i>
+                            </div>
+                            <div class="faq-answer">
+                                <p>Bạn có thể đổi chỗ ngồi qua:</p>
+                                <ul>
+                                    <li>App VietJet Air (miễn phí)</li>
+                                    <li>Website vietjetair.com</li>
+                                    <li>Quầy check-in tại sân bay</li>
+                                    <li>Gọi tổng đài 1900 545 486</li>
+                                </ul>
+                                <p>Một số chỗ ngồi đặc biệt có thể phát sinh phí bổ sung.</p>
+                            </div>
+                        </div>
+
+                        <div class="faq-item" data-category="baggage">
+                            <div class="faq-question" onclick="toggleFAQ(this)">
+                                <span>Có thể mang thức ăn lên máy bay không?</span>
+                                <i class="fas fa-chevron-down"></i>
+                            </div>
+                            <div class="faq-answer">
+                                <p><strong>Được phép:</strong> Thức ăn khô, trái cây, bánh kẹo<br>
+                                <strong>Không được:</strong> Chất lỏng quá 100ml, đồ uống có cồn</p>
+                                <p>Thức ăn phải được đóng gói cẩn thận và không có mùi khó chịu.</p>
+                            </div>
+                        </div>
+
+                        <div class="faq-item" data-category="booking">
+                            <div class="faq-question" onclick="toggleFAQ(this)">
+                                <span>Làm thế nào để thay đổi thông tin hành khách?</span>
+                                <i class="fas fa-chevron-down"></i>
+                            </div>
+                            <div class="faq-answer">
+                                <p>Thay đổi thông tin hành khách qua:</p>
+                                <ul>
+                                    <li>Website vietjetair.com → Quản lý đặt chỗ</li>
+                                    <li>App VietJet Air</li>
+                                    <li>Gọi tổng đài 1900 545 486</li>
+                                </ul>
+                                <p><strong>Lưu ý:</strong> Thay đổi tên hành khách có thể phát sinh phí. Một số thay đổi không được phép.</p>
+                            </div>
+                        </div>
+
+                        <div class="faq-item" data-category="booking">
+                            <div class="faq-question" onclick="toggleFAQ(this)">
+                                <span>Tôi có thể hủy vé và được hoàn tiền không?</span>
+                                <i class="fas fa-chevron-down"></i>
+                            </div>
+                            <div class="faq-answer">
+                                <p>Chính sách hoàn tiền tùy thuộc loại vé:</p>
+                                <ul>
+                                    <li><strong>Vé Eco:</strong> Không được hoàn tiền</li>
+                                    <li><strong>Vé SkyBoss:</strong> Được hoàn một phần sau khi trừ phí</li>
+                                    <li><strong>Vé Deluxe:</strong> Được hoàn linh hoạt</li>
+                                </ul>
+                                <p>Vui lòng kiểm tra điều kiện vé cụ thể khi đặt.</p>
+                            </div>
+                        </div>
+
+                        <div class="faq-item" data-category="flight">
+                            <div class="faq-question" onclick="toggleFAQ(this)">
+                                <span>Tôi quên mang CCCD/Hộ chiếu, có thể lên máy bay không?</span>
+                                <i class="fas fa-chevron-down"></i>
+                            </div>
+                            <div class="faq-answer">
+                                <p><strong>Không thể lên máy bay</strong> mà không có giấy tờ tùy thân hợp lệ.</p>
+                                <p>Bạn cần có:</p>
+                                <ul>
+                                    <li>CCCD/Hộ chiếu gốc (còn hạn)</li>
+                                    <li>Bằng lái xe có ảnh (trong một số trường hợp)</li>
+                                </ul>
+                                <p>Bản sao, ảnh chụp không được chấp nhận.</p>
+                            </div>
+                        </div>
+
+                        <div class="faq-item" data-category="flight">
+                            <div class="faq-question" onclick="toggleFAQ(this)">
+                                <span>Chuyến bay bị delay, tôi được bồi thường gì?</span>
+                                <i class="fas fa-chevron-down"></i>
+                            </div>
+                            <div class="faq-answer">
+                                <p>VietJet hỗ trợ khi chuyến bay bị delay:</p>
+                                <ul>
+                                    <li><strong>Delay 2-4 tiếng:</strong> Suất ăn nhẹ và nước uống</li>
+                                    <li><strong>Delay 4-6 tiếng:</strong> Bữa ăn chính</li>
+                                    <li><strong>Delay qua đêm:</strong> Khách sạn (nếu cần thiết)</li>
+                                </ul>
+                                <p>Liên hệ nhân viên sân bay để được hỗ trợ cụ thể.</p>
+                            </div>
+                        </div>
+
+                        <div class="faq-item" data-category="other">
+                            <div class="faq-question" onclick="toggleFAQ(this)">
+                                <span>Làm sao để đăng ký thành viên SkyJoy?</span>
+                                <i class="fas fa-chevron-down"></i>
+                            </div>
+                            <div class="faq-answer">
+                                <p>Đăng ký thành viên SkyJoy miễn phí qua:</p>
+                                <ul>
+                                    <li>Website vietjetair.com</li>
+                                    <li>App VietJet Air</li>
+                                    <li>Quầy check-in tại sân bay</li>
+                                </ul>
+                                <p><strong>Quyền lợi:</strong> Tích điểm, giảm giá, ưu tiên check-in và nhiều ưu đãi khác.</p>
+                            </div>
+                        </div>
+
+                        <div class="faq-item" data-category="other">
+                            <div class="faq-question" onclick="toggleFAQ(this)">
+                                <span>Tôi có thể mang theo thú cưng không?</span>
+                                <i class="fas fa-chevron-down"></i>
+                            </div>
+                            <div class="faq-answer">
+                                <p>VietJet cho phép mang thú cưng với điều kiện:</p>
+                                <ul>
+                                    <li>Cân nặng dưới 32kg (bao gồm lồng)</li>
+                                    <li>Có giấy tờ tiêm chủng đầy đủ</li>
+                                    <li>Đăng ký trước ít nhất 48 tiếng</li>
+                                    <li>Phí dịch vụ: 1.500.000 - 3.000.000 VNĐ</li>
+                                </ul>
+                                <p>Liên hệ tổng đài để biết thêm chi tiết.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Contact Support -->
+                <div class="contact-support">
+                    <h3><i class="fas fa-headset"></i> Không tìm thấy câu trả lời?</h3>
+                    <p>Liên hệ với đội ngũ hỗ trợ khách hàng của chúng tôi</p>
+                    <div class="support-options">
+                        <a href="tel:1900545486" class="support-option">
+                            <i class="fas fa-phone"></i>
+                            <span>Gọi 1900 545 486</span>
+                        </a>
+                        <a href="mailto:customercare@vietjetair.com" class="support-option">
+                            <i class="fas fa-envelope"></i>
+                            <span>Gửi email</span>
+                        </a>
+                        <button onclick="openLiveChat()" class="support-option">
+                            <i class="fas fa-comments"></i>
+                            <span>Chat trực tuyến</span>
+                        </button>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Back Button -->
+        <button class="back-btn" id="backBtn" onclick="goToHomePage()">
+            <i class="fas fa-arrow-left"></i>
+            Về trang chủ
+        </button>
+    </div>
+
+    <!-- Scripts -->
+    <script src="script.js"></script>
+</body>
+
+</html>
