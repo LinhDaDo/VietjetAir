@@ -21,47 +21,39 @@ function initializeMapPage() {
 
 // Initialize map interactions
 function initializeMapInteractions() {
-    // Add click handlers to map hotspots (replacing areas)
-    const hotspots = document.querySelectorAll('.map-hotspot');
-    hotspots.forEach(hotspot => {
-        hotspot.addEventListener('click', function() {
-            const areaType = this.getAttribute('data-area');
-            showAreaInfo(areaType);
+    // Add click handlers to navigation buttons
+    const navButtons = document.querySelectorAll('.nav-btn-compact');
+    navButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            // Get the onclick attribute to extract the area ID
+            const onclickAttr = this.getAttribute('onclick');
+            const areaMatch = onclickAttr.match(/highlightArea\('(.+?)'\)/);
+            if (areaMatch) {
+                const areaId = areaMatch[1];
+                highlightMapArea(areaId, this);
+            }
         });
     });
     
-    // Add hover effects for hotspots
-    hotspots.forEach(hotspot => {
-        hotspot.addEventListener('mouseenter', function() {
-            this.style.transform = 'scale(1.15)';
-            this.style.zIndex = '20';
+    // Add hover effects for nav buttons
+    navButtons.forEach(button => {
+        button.addEventListener('mouseenter', function() {
+            if (!this.classList.contains('active')) {
+                this.style.transform = 'translateY(-2px) scale(1.02)';
+            }
         });
         
-        hotspot.addEventListener('mouseleave', function() {
-            if (!this.classList.contains('highlighted')) {
-                this.style.transform = 'scale(1)';
-                this.style.zIndex = '10';
+        button.addEventListener('mouseleave', function() {
+            if (!this.classList.contains('active')) {
+                this.style.transform = '';
             }
         });
     });
 }
 
-// Add map animations
+// Add map animations with enhanced zone animations
 function addMapAnimations() {
-    // Animate hotspots on page load
-    const hotspots = document.querySelectorAll('.map-hotspot');
-    hotspots.forEach((hotspot, index) => {
-        hotspot.style.opacity = '0';
-        hotspot.style.transform = 'scale(0.5)';
-        
-        setTimeout(() => {
-            hotspot.style.transition = 'all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
-            hotspot.style.opacity = '1';
-            hotspot.style.transform = 'scale(1)';
-        }, 300 + (index * 150));
-    });
-    
-    // Animate nav buttons
+    // Animate navigation buttons on page load
     const navBtns = document.querySelectorAll('.nav-btn-compact');
     navBtns.forEach((btn, index) => {
         btn.style.opacity = '0';
@@ -71,40 +63,65 @@ function addMapAnimations() {
             btn.style.transition = 'all 0.6s ease';
             btn.style.opacity = '1';
             btn.style.transform = 'translateX(0)';
-        }, 800 + (index * 150));
-    });
-}
-
-// Highlight specific hotspot
-function highlightArea(areaId) {
-    // Remove previous highlights
-    const hotspots = document.querySelectorAll('.map-hotspot');
-    hotspots.forEach(hotspot => {
-        hotspot.classList.remove('highlighted');
-        hotspot.style.transform = 'scale(1)';
-        hotspot.style.zIndex = '10';
+        }, 300 + (index * 150));
     });
     
-    // Highlight target hotspot
-    const targetHotspot = document.querySelector(`[data-area="${areaId}"]`);
-    if (targetHotspot) {
-        targetHotspot.classList.add('highlighted');
-        targetHotspot.style.transform = 'scale(1.2)';
-        targetHotspot.style.zIndex = '25';
-        targetHotspot.scrollIntoView({ 
-            behavior: 'smooth', 
-            block: 'center' 
-        });
+    // Animate highlight zones preparation
+    const zones = document.querySelectorAll('.highlight-zone');
+    zones.forEach(zone => {
+        zone.style.transition = 'all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
+    });
+    
+    // Add smooth entrance animation for the map image
+    const mapImage = document.querySelector('.airport-map-image');
+    if (mapImage) {
+        mapImage.style.opacity = '0';
+        mapImage.style.transform = 'scale(0.95)';
         
-        // Show area info
+        setTimeout(() => {
+            mapImage.style.transition = 'all 0.8s ease';
+            mapImage.style.opacity = '1';
+            mapImage.style.transform = 'scale(1)';
+        }, 500);
+    }
+}
+
+// Highlight specific map area with visual feedback
+function highlightMapArea(areaId, button) {
+    // Remove previous highlights
+    const allZones = document.querySelectorAll('.highlight-zone');
+    const allButtons = document.querySelectorAll('.nav-btn-compact');
+    
+    allZones.forEach(zone => {
+        zone.classList.remove('active');
+    });
+    
+    allButtons.forEach(btn => {
+        btn.classList.remove('active');
+    });
+    
+    // Highlight target area
+    const targetZone = document.querySelector(`#${areaId}-zone`);
+    if (targetZone) {
+        targetZone.classList.add('active');
+        button.classList.add('active');
+        
+        // Show area info modal
         showAreaInfo(areaId);
         
-        // Remove highlight after 4 seconds
+        // Auto-remove highlight after 5 seconds
         setTimeout(() => {
-            targetHotspot.classList.remove('highlighted');
-            targetHotspot.style.transform = 'scale(1)';
-            targetHotspot.style.zIndex = '10';
-        }, 4000);
+            targetZone.classList.remove('active');
+            button.classList.remove('active');
+        }, 5000);
+    }
+}
+
+// Legacy function for backward compatibility
+function highlightArea(areaId) {
+    const button = document.querySelector(`[onclick*="${areaId}"]`);
+    if (button) {
+        highlightMapArea(areaId, button);
     }
 }
 
@@ -385,6 +402,7 @@ function goBackToHome() {
 
 // Make functions available globally
 window.highlightArea = highlightArea;
+window.highlightMapArea = highlightMapArea;
 window.showAreaInfo = showAreaInfo;
 window.closeAreaModal = closeAreaModal;
 window.goBackToHome = goBackToHome;

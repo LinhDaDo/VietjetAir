@@ -3891,6 +3891,125 @@ input:checked + .toggle-label:before {
     transform: scale(1.02);
 }
 
+/* Interactive Map Overlay */
+.map-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    pointer-events: none;
+    z-index: 5;
+}
+
+/* Highlight Zones */
+.highlight-zone {
+    position: absolute;
+    opacity: 0;
+    transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    border-radius: 15px;
+    backdrop-filter: blur(5px);
+    border: 3px solid;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.3);
+    transform: scale(0.8);
+}
+
+.highlight-zone.active {
+    opacity: 1;
+    transform: scale(1);
+    animation: pulse-highlight 2s ease-in-out infinite;
+}
+
+/* Zone positioning based on actual terminal layout */
+.checkin-zone {
+    top: 25%;
+    left: 10%;
+    width: 35%;
+    height: 20%;
+    background: linear-gradient(135deg, rgba(255, 107, 53, 0.3), rgba(227, 30, 36, 0.3));
+    border-color: #FF6B35;
+}
+
+.security-zone {
+    top: 50%;
+    left: 35%;
+    width: 30%;
+    height: 15%;
+    background: linear-gradient(135deg, rgba(231, 76, 60, 0.3), rgba(192, 57, 43, 0.3));
+    border-color: #e74c3c;
+}
+
+.gate-zone {
+    top: 15%;
+    right: 15%;
+    width: 25%;
+    height: 25%;
+    background: linear-gradient(135deg, rgba(46, 204, 113, 0.3), rgba(39, 174, 96, 0.3));
+    border-color: #2ecc71;
+}
+
+.facilities-zone {
+    bottom: 20%;
+    left: 25%;
+    width: 40%;
+    height: 18%;
+    background: linear-gradient(135deg, rgba(243, 156, 18, 0.3), rgba(230, 126, 34, 0.3));
+    border-color: #f39c12;
+}
+
+/* Zone Labels */
+.zone-label {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    color: white;
+    font-weight: 700;
+    text-align: center;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
+    padding: 15px;
+    background: rgba(0, 0, 0, 0.6);
+    border-radius: 12px;
+    backdrop-filter: blur(10px);
+}
+
+.zone-label i {
+    font-size: 24px;
+    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.5));
+}
+
+.zone-label span {
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 1.2;
+}
+
+/* Pulse highlight animation */
+@keyframes pulse-highlight {
+    0%, 100% {
+        box-shadow: 0 0 30px rgba(0, 0, 0, 0.3), 0 0 0 0 currentColor;
+        transform: scale(1);
+    }
+    50% {
+        box-shadow: 0 0 40px rgba(0, 0, 0, 0.4), 0 0 0 15px transparent;
+        transform: scale(1.05);
+    }
+}
+
+/* Enhanced nav button interactions */
+.nav-btn-compact.active {
+    background: linear-gradient(135deg, #27ae60 0%, #2ecc71 100%);
+    transform: translateY(-2px) scale(1.05);
+    box-shadow: 0 8px 25px rgba(46, 204, 113, 0.4);
+}
+
+.nav-btn-compact.active::before {
+    left: 100%;
+}
+
 /* Interactive Map Hotspots */
 .map-hotspot {
     position: absolute;

@@ -171,6 +171,38 @@
                                  alt="Bản đồ tầng khởi hành Terminal 2 - Sân bay Tân Sơn Nhất" 
                                  class="airport-map-image"
                                  onerror="this.src='https://www.vietnamairport.vn/uploads/images/userfiles/images/tan-son-nhat/banghinhtansonnhat.jpg'">
+                            
+                            <!-- Interactive overlay for highlighting areas -->
+                            <div class="map-overlay" id="mapOverlay">
+                                <!-- Highlight zones for different areas -->
+                                <div class="highlight-zone checkin-zone" id="checkin-vietjet-zone" data-area="checkin-vietjet">
+                                    <div class="zone-label">
+                                        <i class="fas fa-check-circle"></i>
+                                        <span>Quầy Check-in VietJet</span>
+                                    </div>
+                                </div>
+                                
+                                <div class="highlight-zone security-zone" id="security-zone" data-area="security">
+                                    <div class="zone-label">
+                                        <i class="fas fa-shield-alt"></i>
+                                        <span>Kiểm tra An ninh</span>
+                                    </div>
+                                </div>
+                                
+                                <div class="highlight-zone gate-zone" id="domestic-gates-zone" data-area="domestic-gates">
+                                    <div class="zone-label">
+                                        <i class="fas fa-plane-departure"></i>
+                                        <span>Cổng Nội địa</span>
+                                    </div>
+                                </div>
+                                
+                                <div class="highlight-zone facilities-zone" id="facilities-zone" data-area="facilities">
+                                    <div class="zone-label">
+                                        <i class="fas fa-utensils"></i>
+                                        <span>Tiện ích & Nhà hàng</span>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     
