@@ -21,24 +21,26 @@ function initializeMapPage() {
 
 // Initialize map interactions
 function initializeMapInteractions() {
-    // Add click handlers to map areas
-    const areas = document.querySelectorAll('.area');
-    areas.forEach(area => {
-        area.addEventListener('click', function() {
+    // Add click handlers to map hotspots (replacing areas)
+    const hotspots = document.querySelectorAll('.map-hotspot');
+    hotspots.forEach(hotspot => {
+        hotspot.addEventListener('click', function() {
             const areaType = this.getAttribute('data-area');
             showAreaInfo(areaType);
         });
     });
     
-    // Add hover effects
-    areas.forEach(area => {
-        area.addEventListener('mouseenter', function() {
-            this.style.transform = 'translateY(-5px) scale(1.05)';
+    // Add hover effects for hotspots
+    hotspots.forEach(hotspot => {
+        hotspot.addEventListener('mouseenter', function() {
+            this.style.transform = 'scale(1.15)';
+            this.style.zIndex = '20';
         });
         
-        area.addEventListener('mouseleave', function() {
+        hotspot.addEventListener('mouseleave', function() {
             if (!this.classList.contains('highlighted')) {
-                this.style.transform = '';
+                this.style.transform = 'scale(1)';
+                this.style.zIndex = '10';
             }
         });
     });
@@ -46,21 +48,21 @@ function initializeMapInteractions() {
 
 // Add map animations
 function addMapAnimations() {
-    // Animate areas on page load
-    const areas = document.querySelectorAll('.area');
-    areas.forEach((area, index) => {
-        area.style.opacity = '0';
-        area.style.transform = 'translateY(30px)';
+    // Animate hotspots on page load
+    const hotspots = document.querySelectorAll('.map-hotspot');
+    hotspots.forEach((hotspot, index) => {
+        hotspot.style.opacity = '0';
+        hotspot.style.transform = 'scale(0.5)';
         
         setTimeout(() => {
-            area.style.transition = 'all 0.6s ease';
-            area.style.opacity = '1';
-            area.style.transform = 'translateY(0)';
-        }, 200 + (index * 100));
+            hotspot.style.transition = 'all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275)';
+            hotspot.style.opacity = '1';
+            hotspot.style.transform = 'scale(1)';
+        }, 300 + (index * 150));
     });
     
     // Animate nav buttons
-    const navBtns = document.querySelectorAll('.nav-btn');
+    const navBtns = document.querySelectorAll('.nav-btn-compact');
     navBtns.forEach((btn, index) => {
         btn.style.opacity = '0';
         btn.style.transform = 'translateX(-30px)';
@@ -73,20 +75,23 @@ function addMapAnimations() {
     });
 }
 
-// Highlight specific area
+// Highlight specific hotspot
 function highlightArea(areaId) {
     // Remove previous highlights
-    const areas = document.querySelectorAll('.area');
-    areas.forEach(area => {
-        area.classList.remove('highlighted');
-        area.style.transform = '';
+    const hotspots = document.querySelectorAll('.map-hotspot');
+    hotspots.forEach(hotspot => {
+        hotspot.classList.remove('highlighted');
+        hotspot.style.transform = 'scale(1)';
+        hotspot.style.zIndex = '10';
     });
     
-    // Highlight target area
-    const targetArea = document.querySelector(`[data-area="${areaId}"]`);
-    if (targetArea) {
-        targetArea.classList.add('highlighted');
-        targetArea.scrollIntoView({ 
+    // Highlight target hotspot
+    const targetHotspot = document.querySelector(`[data-area="${areaId}"]`);
+    if (targetHotspot) {
+        targetHotspot.classList.add('highlighted');
+        targetHotspot.style.transform = 'scale(1.2)';
+        targetHotspot.style.zIndex = '25';
+        targetHotspot.scrollIntoView({ 
             behavior: 'smooth', 
             block: 'center' 
         });
@@ -94,10 +99,12 @@ function highlightArea(areaId) {
         // Show area info
         showAreaInfo(areaId);
         
-        // Remove highlight after 3 seconds
+        // Remove highlight after 4 seconds
         setTimeout(() => {
-            targetArea.classList.remove('highlighted');
-        }, 3000);
+            targetHotspot.classList.remove('highlighted');
+            targetHotspot.style.transform = 'scale(1)';
+            targetHotspot.style.zIndex = '10';
+        }, 4000);
     }
 }
 

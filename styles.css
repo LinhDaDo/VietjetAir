@@ -76,6 +76,16 @@
     }
 }
 
+/* Main App Transition */
+.main-app {
+    opacity: 0;
+    transition: opacity 0.5s ease;
+}
+
+.main-app.visible {
+    opacity: 1;
+}
+
 /* Support Page Styles */
 .support-section {
     max-width: 1200px;
@@ -3606,6 +3616,567 @@ input:checked + .toggle-label:before {
     
     .area-content p {
         font-size: 12px;
+    }
+}
+
+/* Professional Compact Map Layout for 11.6" Robot Screen (1920x1080) */
+.map-compact {
+    height: calc(100vh - 85px);
+    overflow: hidden;
+    background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+}
+
+.map-page-content-compact {
+    height: 100%;
+    margin: 0;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.map-main-layout {
+    display: grid;
+    grid-template-columns: 300px 1fr 320px;
+    gap: 25px;
+    height: 100%;
+    max-height: calc(100vh - 125px);
+}
+
+/* Left Sidebar - Legend & Navigation */
+.map-sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.map-legend-compact {
+    background: linear-gradient(145deg, #ffffff 0%, #f8f9fa 100%);
+    backdrop-filter: blur(15px);
+    border-radius: 20px;
+    padding: 25px;
+    border: 1px solid #e3e6ea;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1), 0 2px 8px rgba(0, 0, 0, 0.05);
+    position: relative;
+    overflow: hidden;
+}
+
+.map-legend-compact::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #FF6B35 0%, #E31E24 50%, #FF6B35 100%);
+    border-radius: 20px 20px 0 0;
+}
+
+.map-legend-compact h4 {
+    color: #1a202c;
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    letter-spacing: -0.5px;
+}
+
+.map-legend-compact h4 i {
+    color: #FF6B35;
+    font-size: 20px;
+}
+
+.legend-grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 12px;
+}
+
+.legend-item-compact {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 14px;
+    color: #2d3748;
+    font-weight: 500;
+    padding: 8px 12px;
+    border-radius: 10px;
+    transition: all 0.3s ease;
+    background: rgba(255, 255, 255, 0.7);
+}
+
+.legend-item-compact:hover {
+    background: rgba(255, 107, 53, 0.1);
+    transform: translateX(5px);
+}
+
+.legend-color {
+    width: 16px;
+    height: 16px;
+    border-radius: 4px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.quick-navigation-compact {
+    background: linear-gradient(145deg, #ffffff 0%, #f8f9fa 100%);
+    backdrop-filter: blur(15px);
+    border-radius: 20px;
+    padding: 25px;
+    border: 1px solid #e3e6ea;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1), 0 2px 8px rgba(0, 0, 0, 0.05);
+    flex: 1;
+    position: relative;
+    overflow: hidden;
+}
+
+.quick-navigation-compact::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #3182ce 0%, #2b6cb0 50%, #3182ce 100%);
+    border-radius: 20px 20px 0 0;
+}
+
+.quick-navigation-compact h4 {
+    color: #1a202c;
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    letter-spacing: -0.5px;
+}
+
+.quick-navigation-compact h4 i {
+    color: #3182ce;
+    font-size: 20px;
+}
+
+.nav-buttons-compact {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.nav-btn-compact {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 14px 18px;
+    background: linear-gradient(135deg, #FF6B35 0%, #E31E24 100%);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    font-size: 14px;
+    font-weight: 600;
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(227, 30, 36, 0.2);
+}
+
+.nav-btn-compact::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.5s ease;
+}
+
+.nav-btn-compact:hover::before {
+    left: 100%;
+}
+
+.nav-btn-compact:hover {
+    transform: translateY(-2px) scale(1.02);
+    box-shadow: 0 8px 25px rgba(227, 30, 36, 0.4);
+}
+
+.nav-btn-compact:active {
+    transform: translateY(0) scale(0.98);
+}
+
+.nav-btn-compact i {
+    font-size: 16px;
+}
+
+/* Center - Professional Airport Map */
+.airport-map-compact {
+    background: linear-gradient(145deg, #ffffff 0%, #f8f9fa 100%);
+    backdrop-filter: blur(15px);
+    border-radius: 20px;
+    padding: 30px;
+    border: 1px solid #e3e6ea;
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.12), 0 4px 12px rgba(0, 0, 0, 0.08);
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+}
+
+.airport-map-compact::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 6px;
+    background: linear-gradient(90deg, #FF6B35 0%, #E31E24 30%, #3182ce 70%, #FF6B35 100%);
+    border-radius: 20px 20px 0 0;
+}
+
+.map-header-compact {
+    text-align: center;
+    margin-bottom: 25px;
+    padding-top: 10px;
+}
+
+.map-header-compact h3 {
+    color: #1a202c;
+    font-size: 24px;
+    font-weight: 800;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    letter-spacing: -0.5px;
+}
+
+.map-header-compact h3 i {
+    color: #FF6B35;
+    font-size: 26px;
+}
+
+.map-header-compact p {
+    color: #4a5568;
+    font-size: 16px;
+    margin: 0;
+    font-weight: 500;
+    opacity: 0.8;
+}
+
+/* Airport Map Image Container */
+.airport-map-image-container {
+    position: relative;
+    flex: 1;
+    background: rgba(255, 255, 255, 0.5);
+    border-radius: 15px;
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.airport-map-image {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    border-radius: 15px;
+    transition: all 0.3s ease;
+}
+
+.airport-map-image:hover {
+    transform: scale(1.02);
+}
+
+/* Interactive Map Hotspots */
+.map-hotspot {
+    position: absolute;
+    width: 120px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 12px;
+    border-radius: 25px;
+    color: white;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(10px);
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    z-index: 10;
+    animation: pulse-glow 3s ease-in-out infinite;
+}
+
+.map-hotspot i {
+    font-size: 16px;
+    filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.3));
+}
+
+.map-hotspot span {
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+    white-space: nowrap;
+}
+
+.map-hotspot:hover {
+    transform: scale(1.1);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+    border-color: rgba(255, 255, 255, 0.6);
+    animation: none;
+}
+
+/* Hotspot Colors */
+.checkin-hotspot {
+    background: linear-gradient(135deg, #FF6B35 0%, #E31E24 100%);
+}
+
+.security-hotspot {
+    background: linear-gradient(135deg, #e74c3c 0%, #c0392b 100%);
+}
+
+.gate-hotspot {
+    background: linear-gradient(135deg, #2ecc71 0%, #27ae60 100%);
+}
+
+.facilities-hotspot {
+    background: linear-gradient(135deg, #f39c12 0%, #e67e22 100%);
+}
+
+/* Pulsing Animation for Hotspots */
+@keyframes pulse-glow {
+    0%, 100% {
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2), 0 0 0 0 rgba(255, 107, 53, 0.4);
+    }
+    50% {
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2), 0 0 0 10px rgba(255, 107, 53, 0);
+    }
+}
+
+.security-hotspot {
+    animation: pulse-glow-red 3s ease-in-out infinite 0.5s;
+}
+
+@keyframes pulse-glow-red {
+    0%, 100% {
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2), 0 0 0 0 rgba(231, 76, 60, 0.4);
+    }
+    50% {
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2), 0 0 0 10px rgba(231, 76, 60, 0);
+    }
+}
+
+.gate-hotspot {
+    animation: pulse-glow-green 3s ease-in-out infinite 1s;
+}
+
+@keyframes pulse-glow-green {
+    0%, 100% {
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2), 0 0 0 0 rgba(46, 204, 113, 0.4);
+    }
+    50% {
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2), 0 0 0 10px rgba(46, 204, 113, 0);
+    }
+}
+
+.facilities-hotspot {
+    animation: pulse-glow-orange 3s ease-in-out infinite 1.5s;
+}
+
+@keyframes pulse-glow-orange {
+    0%, 100% {
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2), 0 0 0 0 rgba(243, 156, 18, 0.4);
+    }
+    50% {
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2), 0 0 0 10px rgba(243, 156, 18, 0);
+    }
+}
+
+/* Right Sidebar - Professional Important Notes */
+.important-notes-compact {
+    background: linear-gradient(145deg, #ffffff 0%, #f8f9fa 100%);
+    backdrop-filter: blur(15px);
+    border-radius: 20px;
+    padding: 25px;
+    border: 1px solid #e3e6ea;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1), 0 2px 8px rgba(0, 0, 0, 0.05);
+    height: fit-content;
+    max-height: 100%;
+    overflow-y: auto;
+    position: relative;
+    overflow: hidden;
+}
+
+.important-notes-compact::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(90deg, #e53e3e 0%, #c53030 50%, #e53e3e 100%);
+    border-radius: 20px 20px 0 0;
+}
+
+.important-notes-compact h4 {
+    color: #1a202c;
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    letter-spacing: -0.5px;
+    padding-top: 5px;
+}
+
+.important-notes-compact h4 i {
+    color: #e53e3e;
+    font-size: 20px;
+}
+
+.notes-compact {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.note-item-compact {
+    display: flex;
+    align-items: flex-start;
+    gap: 15px;
+    padding: 18px;
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.9) 0%, rgba(248, 249, 250, 0.8) 100%);
+    border-radius: 16px;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    position: relative;
+    overflow: hidden;
+}
+
+.note-item-compact::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 4px;
+    background: linear-gradient(180deg, #FF6B35 0%, #E31E24 100%);
+    transform: scaleY(0);
+    transition: transform 0.4s ease;
+}
+
+.note-item-compact:hover::before {
+    transform: scaleY(1);
+}
+
+.note-item-compact:hover {
+    background: linear-gradient(135deg, rgba(255, 107, 53, 0.1) 0%, rgba(227, 30, 36, 0.05) 100%);
+    transform: translateX(8px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+    border-color: rgba(255, 107, 53, 0.3);
+}
+
+.note-icon-compact {
+    width: 40px;
+    height: 40px;
+    background: linear-gradient(135deg, #FF6B35 0%, #E31E24 100%);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 16px;
+    flex-shrink: 0;
+    box-shadow: 0 4px 12px rgba(227, 30, 36, 0.3);
+    position: relative;
+    overflow: hidden;
+}
+
+.note-icon-compact::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: -50%;
+    width: 200%;
+    height: 200%;
+    background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transform: rotate(45deg);
+    transition: all 0.6s ease;
+    opacity: 0;
+}
+
+.note-item-compact:hover .note-icon-compact::before {
+    opacity: 1;
+    animation: shimmer 1s ease-in-out;
+}
+
+@keyframes shimmer {
+    0% {
+        transform: translateX(-100%) translateY(-100%) rotate(45deg);
+    }
+    100% {
+        transform: translateX(100%) translateY(100%) rotate(45deg);
+    }
+}
+
+.note-content-compact {
+    flex: 1;
+}
+
+.note-content-compact h5 {
+    color: #1a202c;
+    font-size: 16px;
+    font-weight: 700;
+    margin: 0 0 6px 0;
+    line-height: 1.3;
+    letter-spacing: -0.3px;
+}
+
+.note-content-compact p {
+    color: #4a5568;
+    font-size: 13px;
+    margin: 0;
+    line-height: 1.4;
+    font-weight: 500;
+}
+
+/* Responsive for very small screens */
+@media (max-width: 1600px) {
+    .map-main-layout {
+        grid-template-columns: 260px 1fr 280px;
+        gap: 15px;
+    }
+    
+    .map-legend-compact,
+    .quick-navigation-compact,
+    .important-notes-compact {
+        padding: 12px;
+    }
+    
+    .airport-map-compact {
+        padding: 15px;
+    }
+}
+
+@media (max-width: 1366px) {
+    .map-main-layout {
+        grid-template-columns: 240px 1fr 260px;
+        gap: 12px;
+    }
+    
+    .map-areas-compact {
+        gap: 10px;
+    }
+    
+    .map-areas-compact .area {
+        min-height: 80px;
+        padding: 12px;
     }
 }
 

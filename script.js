@@ -9,7 +9,18 @@ let isAppLoaded = false;
 
 // Initialize the application
 document.addEventListener('DOMContentLoaded', function() {
-    showLoadingScreen();
+    // Check if splash screen has been shown before
+    const hasShownSplash = sessionStorage.getItem('vietjet_splash_shown');
+    
+    if (!hasShownSplash) {
+        // First time loading - show splash screen
+        showLoadingScreen();
+        // Mark splash as shown for this session
+        sessionStorage.setItem('vietjet_splash_shown', 'true');
+    } else {
+        // Skip splash screen and go directly to main app
+        skipToMainApp();
+    }
 });
 
 // Show loading screen and simulate loading process
@@ -47,6 +58,22 @@ function completeLoading() {
         }, 100);
         
     }, 800); // Wait for fade out transition
+}
+
+// Skip splash screen and go directly to main app
+function skipToMainApp() {
+    const loadingScreen = document.getElementById('loadingScreen');
+    const mainApp = document.getElementById('mainApp');
+    
+    // Hide loading screen immediately
+    loadingScreen.style.display = 'none';
+    
+    // Show main app immediately
+    mainApp.style.display = 'block';
+    mainApp.classList.add('visible');
+    
+    // Initialize the main app
+    initializeMainApp();
 }
 
 // Initialize main application after loading
